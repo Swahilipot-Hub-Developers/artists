@@ -1,12 +1,15 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Portfolio from "@/components/portfolio/Portfolio"
 
-export default function Home() {
+const { default: Hero } = require("@/components/landing/Hero")
+
+
+const Landing = () => {
   return (
-    <div>
-      <main className="container">
-        <p className="display-5 fw-bold text-center">Welcome to the website</p>
-      </main>
-    </div>
+    <>
+    <Hero />
+    <Portfolio />
+    </>
   )
 }
+
+export default Landing
