@@ -191,6 +191,7 @@ body {
     color: rgba(255, 255, 255, 0.9);
     white-space: nowrap;
     transition: 0.3s;
+    text-decoration: none;
   }
   
   .navbar a i,
@@ -797,6 +798,7 @@ body {
     color: #fff;
     background: #ff4a17;
     border: 2px solid #ff4a17;
+    text-decoration: none;
   }
   
   #heroproj .btn-get-started:hover {

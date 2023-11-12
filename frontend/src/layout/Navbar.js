@@ -1,6 +1,6 @@
 // Navbar.js
 
-import Link from 'next/link';
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -25,26 +25,32 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <div className="nav-link scrollto" href="#" target="_blank">
-                Upcoming Events
-              </div>
+              <Link href="/">
+                <div className="nav-link scrollto" href="#" target="_blank">
+                  Upcoming Events
+                </div>
+              </Link>
             </li>
             <li>
-              <div className="nav-link scrollto" href="#">
-                Login
-              </div>
+            <Link href="/">
+                <div className="nav-link scrollto" href="#" target="_blank">
+                  Login
+                </div>
+              </Link>
             </li>
             <li>
-              <div className="nav-link scrollto" href="#">
-                Team
-              </div>
+            <Link href="/">
+                <div className="nav-link scrollto" href="#" target="_blank">
+                  Sign Up
+                </div>
+              </Link>
             </li>
             <li className="dropdown getstarted">
               <div>
                 <span>Take Action</span> <i className="bi bi-chevron-down"></i>
               </div>
               <ul>
-                <li>
+                <li> 
                   <Link href="/contact">
                     <div>Volunteer</div>
                   </Link>

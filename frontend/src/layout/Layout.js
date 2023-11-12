@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
       <main id="content" role="main">
         {children}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

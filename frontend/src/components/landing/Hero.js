@@ -9,7 +9,7 @@ const Hero = () => {
                 <h1>Our Artists</h1>
                 <h2>Below are some of our artists</h2>
                 <div className='d-flex'>
-                    <Link href='portfolio/Portfolio' className='btn-get-started scrollto'>
+                    <Link href='#portfolio' className='btn-get-started scrollto'>
                         View Artists
                     </Link>
                 </div>
