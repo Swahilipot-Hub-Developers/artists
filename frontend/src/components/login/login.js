@@ -1,74 +1,64 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router'; // Import the useRouter hook
-import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
-const LoginForm = () => {
-  const router = useRouter(); // Initialize the useRouter hook
-
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    fetch('http://your-django-api-url/api/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.message === 'Login successful') {
-          alert('Login successful!');
-          // Redirect to the home page
-          router.push('/');
-        } else {
-          alert('Invalid credentials');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('/api/login', {
+        username,
+        password,
       });
+      console.log(response.data); // Handle success (store token, redirect, etc.)
+      alert('Login successful!');
+    } catch (error) {
+      console.error('Login failed', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error setting up the request:', error.message);
+      }
+      alert('Login failed. Please check your credentials and try again.');
+      // Handle error (display error message, etc.)
+    }
   };
 
   return (
     <div className="container mt-5">
-      <h2>Login</h2>
-      <form>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-      </form>
+      <h1>Login</h1>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <input
+          type="password"
+          className="form-control"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button className="btn btn-primary" onClick={handleLogin}>
+        Login
+      </button>
     </div>
   );
 };
 
-export default LoginForm;
+export default Login;
