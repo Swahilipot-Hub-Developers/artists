@@ -2622,7 +2622,15 @@ body {
   }
   
   .section-title {
-    padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: 900;
+      padding: 0;
+      line-height: 1px;
+      margin: 0 0 5px 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #5c8eb0;
+      font-family: "Poppins", sans-serif;
   }
   
   .section-title h2 {
@@ -2633,7 +2641,7 @@ body {
     margin: 0 0 5px 0;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #5c8eb0;
+    /* color: #5c8eb0; */
     font-family: "Poppins", sans-serif;
   }
   
@@ -2883,6 +2891,7 @@ body {
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
+    font-style: italic;
   }
   
   /*--------------------------------------------------------------

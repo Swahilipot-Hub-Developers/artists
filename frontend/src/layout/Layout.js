@@ -1,17 +1,16 @@
-import React from "react";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+// layout/Layout.js
 
-const Layout = ({ children }) => {
+import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+
+const Layout = ({ children, includeNavbar = true, includeFooter = true }) => {
   return (
-    <>
-
-     <Navbar />
-      <main id="content" role="main">
-        {children}
-      </main>
-      <Footer />
-    </>
+    <div>
+      {includeNavbar && <Navbar />}
+      {children}
+      {includeFooter && <Footer />}
+    </div>
   );
 };
 

@@ -25,21 +25,21 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="portfolio">
                 <div className="nav-link scrollto" href="#" target="_blank">
                   Upcoming Events
                 </div>
               </Link>
             </li>
             <li>
-            <Link href="/">
+            <Link href="/login">
                 <div className="nav-link scrollto" href="#" target="_blank">
                   Login
                 </div>
               </Link>
             </li>
             <li>
-            <Link href="/">
+            <Link href="/signup">
                 <div className="nav-link scrollto" href="#" target="_blank">
                   Sign Up
                 </div>
