@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Portfolio = () => {
-  const [artists, setArtists] = useState([
+  const originalArtists = [
     { name: "Chris Achinga", profession: "Software Engineer", class: "filter-visual-artists" },
     { name: "Chris Achinga", profession: "Software Engineer", class: "filter-performing-artists"},
     { name: "Chris Achinga", profession: "Software Engineer", class: "filter-literary-artists" },
@@ -18,7 +18,25 @@ const Portfolio = () => {
     { name: "Chris Achinga", profession: "Software Engineer", class: "filter-visual-artists" },
     { name: "Chris Achinga", profession: "Software Engineer", class: "filter-fashion-designs" },
     { name: "Chris Achinga", profession: "Software Engineer", class: "filter-fashion-designs" },
-  ]);
+    // ... (your original list of artists)
+  ];
+
+  const [artists, setArtists] = useState(originalArtists);
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleKeyUp = () => {
+    const filteredArtists = originalArtists.filter(
+      (artist) =>
+        artist.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        artist.profession.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setArtists(filteredArtists);
+  };
+
+  const handleSearch = () => {
+    setSearchValue("");
+    setArtists(originalArtists);
+  };
 
   return (
     <>
@@ -33,7 +51,7 @@ const Portfolio = () => {
               <div className="col-lg-14">
                 <ul id="portfolio-flters">
                   <li data-filter="*" className="filter-active">
-                    All{" "}
+                    All
                   </li>
                   <li data-filter=".filter-visual-artists">Visual Artists</li>
                   <li data-filter=".filter-performing-artists">
@@ -68,10 +86,17 @@ const Portfolio = () => {
                       type="text"
                       className="form-control"
                       placeholder="Search Artists..."
+                      value={searchValue}
+                      onChange={(e) => setSearchValue(e.target.value)}
+                      onKeyUp={handleKeyUp}
                     />
                   </div>
                 </form>
-                <button type="button" className="btn btn-primary btn-lg mb-2">
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg mb-2"
+                  onClick={handleSearch}
+                >
                   Search
                 </button>
               </div>
@@ -83,17 +108,18 @@ const Portfolio = () => {
               data-aos-delay="200"
             >
               {artists.map((artist, index) => (
-             <div key={index} className={`col-lg-4 col-md-6 portfolio-item ${artist.class}`}>
+                <div key={index} className={`col-lg-4 col-md-6 portfolio-item ${artist.class}`}>
                   <div className="portfolio-wrap">
                     <figure>
                       <img
                         src="assets/images/projects/Image_30.jpg"
                         className="img-fluid"
                         alt=""
-                      ></img>
+                      />
                     </figure>
                     <div className="portfolio-info">
                       <h4>{artist.name}</h4>
+                      <hr style={{borderTop: '2px solid ', width: '100%'}}></hr>
                       <p>{artist.profession}</p>
                     </div>
                   </div>
