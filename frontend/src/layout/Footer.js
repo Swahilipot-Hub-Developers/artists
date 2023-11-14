@@ -28,6 +28,29 @@ const Footer = () => {
     },
   ];
 
+  const socialMediaLinks = [
+    {
+      icon: '/socials/facebook.svg',
+      alt: 'Facebook',
+      url: 'https://www.facebook.com/swahilipothub',
+    },
+    {
+      icon: '/socials/instagram.svg',
+      alt: 'Instagram',
+      url: 'https://www.instagram.com/swahilipothub',
+    },
+    {
+      icon: '/socials/twitterx.svg',
+      alt: 'Twitter(X)',
+      url: 'https://twitter.com/swahilipothub',
+    },
+    {
+      icon: '/socials/youtube.svg',
+      alt: 'Youtube',
+      url: 'https://www.youtube.com/@swahilipothubfoundation',
+    },
+  ];
+
   return (
     <footer className="text-gray-500 bg-white px-4 py-3 max-w-screen-xl mx-auto md:px-8 text-center">
       <div className="container">
@@ -51,26 +74,13 @@ const Footer = () => {
           &copy; 2023 Swahilipot Hub Artists. All rights reserved.
         </div>
         <ul className="list-inline mb-0 d-flex justify-content-center">
-          <li className="list-inline-item">
-            <a href="javascript:void()">
-              <img src="/socials/facebook.svg" alt="Facebook" className="w-6 h-6 text-blue-400" />
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a href="javascript:void()">
-              <img src="/socials/instagram.svg" alt="Instagram" className="w-6 h-6 text-blue-400" />
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a href="javascript:void()">
-              <img src="/socials/twitterx.svg" alt="Twitter(X)" className="w-6 h-6 text-blue-400" />
-            </a>
-          </li>
-          <li className="list-inline-item">
-            <a href="javascript:void()">
-              <img src="/socials/youtube.svg" alt="Youtube" className="w-6 h-6 text-blue-400" />
-            </a>
-          </li>
+          {socialMediaLinks.map((social, idx) => (
+            <li key={idx} className="list-inline-item">
+              <a href={social.url} target="_blank" rel="noopener noreferrer">
+                <img src={social.icon} alt={social.alt} className="w-6 h-6 text-blue-400" />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </footer>
