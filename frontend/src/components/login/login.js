@@ -1,57 +1,104 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import Head from 'next/head';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
-
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post('/api/login', {
-        username,
-        password,
-      });
-
-      console.log(response.data); // Handle success (store token, redirect, etc.)
-      alert('Login successful!');
-
-      // Redirect to the home page
-      router.push('/');
-    } catch (error) {
-      console.error('Login failed', error);
-      // ... (rest of your error handling code)
-      alert('Login failed. Please check your credentials and try again.');
-    }
-  };
-
+const LoginForm = () => {
   return (
-    <div className="container mt-5">
-      <h1>Login</h1>
-      <div className="mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+    <>
+      <Head>
+        <title>Login</title>
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyZ5eJRM63Xs9E9KGdVXTt4u"
+          crossOrigin="anonymous"
         />
-      </div>
-      <div className="mb-3">
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button className="btn btn-primary" onClick={handleLogin}>
-        Login
-      </button>
-    </div>
+      </Head>
+
+      <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
+        <div className="container py-5 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col-xl-10">
+              <div className="card rounded-3 text-black">
+                <div className="row g-0">
+                  <div className="col-lg-6">
+                    <div className="card-body p-md-5 mx-md-4">
+                      <div className="text-center">
+                        <img
+                          src="/logo/logo.png"
+                          style={{ width: '185px' }}
+                          alt="logo"
+                        />
+                        <h4 className="mt-1 mb-5 pb-1">Sign In / Join Us</h4>
+                      </div>
+
+                      <form>
+                        <p>Please login to your account</p>
+
+                        <div className="form-outline mb-4">
+                          <input
+                            type="email"
+                            id="form2Example11"
+                            className="form-control"
+                            placeholder="Phone number or email address"
+                          />
+                          <label className="form-label" htmlFor="form2Example11">
+                            Username
+                          </label>
+                        </div>
+
+                        <div className="form-outline mb-4">
+                          <input
+                            type="password"
+                            id="form2Example22"
+                            className="form-control"
+                          />
+                          <label className="form-label" htmlFor="form2Example22">
+                            Password
+                          </label>
+                        </div>
+
+                        <div className="text-center pt-1 mb-3">
+                          <button
+                            className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-2"
+                            type="button"
+                          >
+                            Log in
+                          </button>
+                          <a className="text-muted" href="#!">
+                            Forgot password?
+                          </a>
+                        </div>
+
+                        <div className="d-flex align-items-center justify-content-center pb-4">
+                          <p className="mb-0 me-2">Don't have an account?</p>
+                          <button type="button" className="btn btn-outline-danger">
+                            Create new
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 d-flex align-items-center gradient-custom-2" style={{ background: 'linear-gradient(to right, #4A90E2, #1E467A)' }}>
+                    <div className="text-white px-3 py-4 p-md-5 mx-md-4">
+                      <h4 className="mb-4">"Unlock Your Canvas, Create Your Profile: Where Art Meets Identity."</h4>
+                      <p className="small mb-0">
+                        "Embark on a Journey Across All Artistic Horizons!
+                        Unleash the full spectrum of your creativity, where each creation becomes a chapter in your
+                        visual autobiography. Connect with a community that appreciates the vast tapestry of artistic 
+                        expression, and be part of a platform that celebrates the beauty in every brushstroke,
+                        photograph, lyric, or sculpture. Your artistic odyssey awaits—sign up today and let your
+                        creativity thrive in a space where all forms of art find their voice and resonate in a 
+                        harmonious symphony of self-expression."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
-export default Login;
+export default LoginForm;
