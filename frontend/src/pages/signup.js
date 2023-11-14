@@ -1,17 +1,21 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Register = () => {
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleRegister = () => {
     // Add your user registration logic here
     // For simplicity, let's just log the form data for now
+    // Testing the apis running in the background
     console.log({ username, email, password });
+
+    // Assuming successful registration, redirect to the login page
+    router.push("/login");
   };
 
   return (
