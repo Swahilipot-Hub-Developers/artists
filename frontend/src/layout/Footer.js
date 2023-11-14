@@ -39,7 +39,7 @@ const Footer = () => {
       </div>
       <ul className="list-unstyled d-flex flex-wrap justify-content-center mt-4">
         {footerNavs.map((item, idx) => (
-          <li key={idx} className="mr-3 mb-2">
+          <li key={idx} className="mr-3 mb-2" style={{ margin: '0 8px' }}>
             <a href={item.href} className="text-decoration-none hover:text-gray-800">
               {item.name}
             </a>
