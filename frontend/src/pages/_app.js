@@ -8,8 +8,9 @@ import Layout from '@/layout/Layout';
 export default function App({ Component, pageProps, router }) {
   const isLoginPage = router.pathname === '/login';
   const isSignupPage = router.pathname === '/signup';
+  const isShowcasePage = router.pathname === '/showcase';
 
-  const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage);
+  const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage || isShowcasePage);
 
   return (
     <Layout includeNavbar={shouldIncludeNavbarAndFooter} includeFooter={shouldIncludeNavbarAndFooter}>
