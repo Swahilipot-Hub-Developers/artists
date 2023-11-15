@@ -27,7 +27,7 @@ const LoginForm = () => {
                           style={{ width: '185px' }}
                           alt="logo"
                         />
-                        <h4 className="mt-1 mb-5 pb-1">Sign In / Join Us</h4>
+                        <h4 className="mt-1 mb-5 pb-1">Sign In</h4>
                       </div>
 
                       <form>
@@ -63,31 +63,25 @@ const LoginForm = () => {
                           >
                             Log in
                           </button>
-                          <a className="text-muted" href="#!">
-                            Forgot password?
-                          </a>
-                        </div>
-
-                        <div className="d-flex align-items-center justify-content-center pb-4">
-                          <p className="mb-0 me-2">Don't have an account?</p>
-                          <button type="button" className="btn btn-outline-danger">
-                            Create new
-                          </button>
+                          <div className="d-flex justify-content-between align-items-center">
+                            <a className="text-muted" href="#!">
+                              Forgot password?
+                            </a>
+                            <button type="button" className="btn btn-link">
+                              Create new account
+                            </button>
+                          </div>
                         </div>
                       </form>
                     </div>
                   </div>
                   <div className="col-lg-6 d-flex align-items-center gradient-custom-2" style={{ background: 'linear-gradient(to right, #4A90E2, #1E467A)' }}>
                     <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                      <h4 className="mb-4">"Unlock Your Canvas, Create Your Profile: Where Art Meets Identity."</h4>
+                      <h4 className="mb-4">"Welcome Back"</h4>
                       <p className="small mb-0">
-                        "Embark on a Journey Across All Artistic Horizons!
-                        Unleash the full spectrum of your creativity, where each creation becomes a chapter in your
-                        visual autobiography. Connect with a community that appreciates the vast tapestry of artistic 
-                        expression, and be part of a platform that celebrates the beauty in every brushstroke,
-                        photograph, lyric, or sculpture. Your artistic odyssey awaits—sign up today and let your
-                        creativity thrive in a space where all forms of art find their voice and resonate in a 
-                        harmonious symphony of self-expression."
+                        Immerse yourself in the vibrant world of art, celebrate creativity in all its forms. Experience captivating performances of dance, music, 
+                        and poetry as we showcase the rich tapestry of artistic expression within our community.
+                        Prepare to be inspired and amazed.
                       </p>
                     </div>
                   </div>
