@@ -9,12 +9,9 @@ const Hero = () => {
                 <h1>"Discover,Showcase, Connect, Thrive."
                 </h1>
                 <h2>
-                "Exploring the boundless realms of creativity, our artists craft visions that transcend
-                 boundaries. From the brushstroke to the melody, every creation is a testament to the endless
-                 tapestry of human expression. Join us on a journey where art knows no limits, and imagination 
-                 knows no bounds."
+                    Join us on a journey where art knows no bounds,<br /> and limitless imagination with our artists.
                 </h2>
-                <div className='d-flex'>
+            <div className='d-flex'>
                     <Link href='#portfolio' className='btn-get-started scrollto'>
                         View Artists
                     </Link>
