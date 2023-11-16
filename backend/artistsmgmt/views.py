@@ -4,6 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
+from .models import Artist
+from .serializers import ArtistSerializer
+from rest_framework import generics
 
 from .serializers import LoginSerializer, RegisterSerializer
 
@@ -35,4 +38,15 @@ class RegisterView(APIView):
         serializer.save()  # Save the user to the database
 
         return Response({'message': 'Registration successful'}, status=status.HTTP_201_CREATED)
+    
+class ArtistListCreateView(generics.ListCreateAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    
+    
+class ArtistRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    
+
 

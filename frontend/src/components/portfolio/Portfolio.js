@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Link from "next/link";
 
 const Portfolio = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    // Fetch items from your Django API
+    fetch("http://localhost:8000/api/items/")
+      .then((response) => response.json())
+      .then((data) => setItems(data))
+      .catch((error) => console.error("Error fetching items:", error));
+  }, []);
+
   const originalArtists = [
     {
       name: "Chris Achinga",
@@ -189,7 +199,7 @@ const Portfolio = () => {
                       </Link>
                     </figure>
                     <div className="portfolio-info">
-                        <h4>{artist.name}</h4>
+                      <h4>{artist.name}</h4>
                       <hr
                         style={{ borderTop: "2px solid ", width: "100%" }}
                       ></hr>
@@ -201,6 +211,31 @@ const Portfolio = () => {
             </div>
           </div>
         </section>
+
+        <div className="container mt-5">
+          <h1 className="mb-4">Artists</h1>
+          <div className="row">
+            {items.map((item) => (
+              <div key={item.id} className="col-md-4 mb-4">
+                <div className="card">
+                  {/* Add logic to display the photo if available */}
+                  {item.photo && (
+                    <img
+                      src={`${item.photo}`}
+                      className="card-img-top"
+                      alt={item.name}
+                    />
+                  )}
+                  <div className="card-body">
+                    <h5 className="card-title">{item.name}</h5>
+                    <h6 className="card-title">{item.type}</h6>
+                    <p className="card-text">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </main>
     </>
   );
