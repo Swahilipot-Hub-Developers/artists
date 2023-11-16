@@ -5,13 +5,23 @@ import Link from "next/link";
 const Portfolio = () => {
   const originalArtists = [
     {
-      name: "Chris Achinga",
-      profession: "Software Engineer",
+      name: "Safari Serengeti",
+      profession: "Acrylic Wildlife Muralist",
       class: "filter-visual-artists",
     },
     {
-      name: "Chris Achinga",
-      profession: "Software Engineer",
+      name: "Pwani Pixel",
+      profession: "Swahili Digital Artisan",
+      class: "filter-visual-artists",
+    },
+    {
+      name: "Bahari Brush",
+      profession: "Oceanic Realism Illustartor",
+      class: "filter-visual-artists",
+    },
+    {
+      name: "Pwani Pixel",
+      profession: "Swahili Digital Artisan",
       class: "filter-performing-artists",
     },
     {
