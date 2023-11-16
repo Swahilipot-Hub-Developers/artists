@@ -1,23 +1,89 @@
 import React, { useState } from "react";
 
+import Link from "next/link";
+
 const Portfolio = () => {
   const originalArtists = [
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-visual-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-performing-artists"},
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-literary-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-fashion-designs" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-sound-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer" , class: "filter-sound-artists"},
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-fashion-designs" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-literary-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-performing-artists"},
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-performing-artists"},
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-performing-artists"},
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-visual-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-visual-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-visual-artists" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-fashion-designs" },
-    { name: "Chris Achinga", profession: "Software Engineer", class: "filter-fashion-designs" },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-visual-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-performing-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-literary-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-fashion-designs",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-sound-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-sound-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-fashion-designs",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-literary-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-performing-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-performing-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-performing-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-visual-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-visual-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-visual-artists",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-fashion-designs",
+    },
+    {
+      name: "Chris Achinga",
+      profession: "Software Engineer",
+      class: "filter-fashion-designs",
+    },
     // ... (your original list of artists)
   ];
 
@@ -108,18 +174,25 @@ const Portfolio = () => {
               data-aos-delay="200"
             >
               {artists.map((artist, index) => (
-                <div key={index} className={`col-lg-4 col-md-6 portfolio-item ${artist.class}`}>
+                <div
+                  key={index}
+                  className={`col-lg-4 col-md-6 portfolio-item ${artist.class}`}
+                >
                   <div className="portfolio-wrap">
                     <figure>
-                      <img
-                        src="assets/images/projects/Image_30.jpg"
-                        className="img-fluid"
-                        alt=""
-                      />
+                      <Link href="/showcase">
+                        <img
+                          src="assets/images/projects/Image_30.jpg"
+                          className="img-fluid"
+                          alt=""
+                        />
+                      </Link>
                     </figure>
                     <div className="portfolio-info">
-                      <h4>{artist.name}</h4>
-                      <hr style={{borderTop: '2px solid ', width: '100%'}}></hr>
+                        <h4>{artist.name}</h4>
+                      <hr
+                        style={{ borderTop: "2px solid ", width: "100%" }}
+                      ></hr>
                       <p>{artist.profession}</p>
                     </div>
                   </div>
