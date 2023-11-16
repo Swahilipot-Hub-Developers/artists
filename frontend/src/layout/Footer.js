@@ -3,27 +3,27 @@ import React from 'react';
 const Footer = () => {
   const footerNavs = [
     {
-      href: 'javascript:void()',
+      href: '#',
       name: 'About',
     },
     {
-      href: 'javascript:void()',
+      href: '#',
       name: 'Blog',
     },
     {
-      href: 'javascript:void()',
+      href: '#',
       name: '',
     },
     {
-      href: 'javascript:void()',
+      href: '#',
       name: 'Team',
     },
     {
-      href: 'javascript:void()',
+      href: '#',
       name: 'Careers',
     },
     {
-      href: 'javascript:void()',
+      href: '#',
       name: 'Support',
     },
   ];
@@ -63,7 +63,7 @@ const Footer = () => {
       <ul className="list-unstyled d-flex flex-wrap justify-content-center mt-4">
         {footerNavs.map((item, idx) => (
           <li key={idx} className="mr-3 mb-2" style={{ margin: '0 8px' }}>
-            <a href={item.href} className="text-decoration-none hover:text-gray-800">
+            <a href={item.href || '#'} className="text-decoration-none hover:text-gray-800">
               {item.name}
             </a>
           </li>
