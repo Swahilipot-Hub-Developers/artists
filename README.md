@@ -5,6 +5,43 @@ Welcome to the Artists Management project repository! This project aims to creat
 
 ## Getting Started
 
+## Installation
+Provide step-by-step instructions on how to set up the project locally. Include any dependencies that need to be installed and configuration steps.
+
+## Frontend (Next.js)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+## Backend (Python Django)
+```bash
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+## Usage
+Explain how to use the application, including any specific commands or actions that the user needs to take.
+
+## Folder Structure
+Briefly describe the structure of the project's folders and key files.
+
+/project-root
+|-- frontend
+|   |-- pages
+|   |-- components
+|   |-- ...
+|-- backend
+|   |-- app1
+|   |-- app2
+|   |-- ...
+|-- ...
+|-- README.md
+|-- .gitignore
+|-- requirements.txt
+|-- ...
+Technologies Used
 ### Prerequisites
 
 - [Node.js](https://nodejs.org) installed
