@@ -1,6 +1,42 @@
-import Head from 'next/head';
+import Head from "next/head";
+import axios from "axios";
+import { useState } from "react";
+import Router from "next/router";
 
 const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    username: "", // Change these as per your form fields
+    password: "",
+  });
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/login",
+        formData
+      );
+
+      if (response.status === 200) {
+        // Successful login handling
+        setErrorMessage("");
+        // Redirect to a dashboard or profile page after successful login
+        Router.push("/showcase"); // Change '/dashboard' to your desired route
+      } else {
+        // Handle other possible responses (e.g., invalid credentials)
+        setErrorMessage("Invalid credentials. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setErrorMessage("Error during login. Please try again.");
+    }
+  };
   return (
     <>
       <Head>
@@ -13,7 +49,10 @@ const LoginForm = () => {
         />
       </Head>
 
-      <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
+      <section
+        className="h-100 gradient-form"
+        style={{ backgroundColor: "#eee" }}
+      >
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-10">
@@ -24,23 +63,28 @@ const LoginForm = () => {
                       <div className="text-center">
                         <img
                           src="/logo/logo.png"
-                          style={{ width: '185px' }}
+                          style={{ width: "185px" }}
                           alt="logo"
                         />
                         <h4 className="mt-1 mb-5 pb-1">Sign In</h4>
                       </div>
 
-                      <form>
+                      <form onSubmit={handleLogin}>
                         <p>Please login to your account</p>
 
                         <div className="form-outline mb-4">
                           <input
-                            type="email"
-                            id="form2Example11"
+                            type="text"
+                            id="username"
                             className="form-control"
-                            placeholder="Phone number or email address"
+                            placeholder="Username"
+                            value={formData.username}
+                            onChange={handleChange}
                           />
-                          <label className="form-label" htmlFor="form2Example11">
+                          <label
+                            className="form-label"
+                            htmlFor="form2Example11"
+                          >
                             Username
                           </label>
                         </div>
@@ -48,10 +92,16 @@ const LoginForm = () => {
                         <div className="form-outline mb-4">
                           <input
                             type="password"
-                            id="form2Example22"
+                            id="password"
                             className="form-control"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
                           />
-                          <label className="form-label" htmlFor="form2Example22">
+                          <label
+                            className="form-label"
+                            htmlFor="form2Example22"
+                          >
                             Password
                           </label>
                         </div>
@@ -59,7 +109,7 @@ const LoginForm = () => {
                         <div className="text-center pt-1 mb-3">
                           <button
                             className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-2"
-                            type="button"
+                            type="submit"
                           >
                             Log in
                           </button>
@@ -75,13 +125,20 @@ const LoginForm = () => {
                       </form>
                     </div>
                   </div>
-                  <div className="col-lg-6 d-flex align-items-center gradient-custom-2" style={{ background: 'linear-gradient(to right, #4A90E2, #1E467A)' }}>
+                  <div
+                    className="col-lg-6 d-flex align-items-center gradient-custom-2"
+                    style={{
+                      background: "linear-gradient(to right, #4A90E2, #1E467A)",
+                    }}
+                  >
                     <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                       <h4 className="mb-4">"Welcome Back"</h4>
                       <p className="small mb-0">
-                        Immerse yourself in the vibrant world of art, celebrate creativity in all its forms. Experience captivating performances of dance, music, 
-                        and poetry as we showcase the rich tapestry of artistic expression within our community.
-                        Prepare to be inspired and amazed.
+                        Immerse yourself in the vibrant world of art, celebrate
+                        creativity in all its forms. Experience captivating
+                        performances of dance, music, and poetry as we showcase
+                        the rich tapestry of artistic expression within our
+                        community. Prepare to be inspired and amazed.
                       </p>
                     </div>
                   </div>
