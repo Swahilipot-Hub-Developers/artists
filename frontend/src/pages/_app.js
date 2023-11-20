@@ -1,5 +1,6 @@
 // pages/_app.js
-
+import { useEffect } from 'react';
+import { initGA, logPageView } from '../utils/analytics'; 
 import '@/styles/globals.css';
 import '../../public/assets/css/styles.css';
 import '../styles/scss/theme.scss';
@@ -11,6 +12,17 @@ export default function App({ Component, pageProps, router }) {
   const isShowcasePage = router.pathname === '/showcase';
 
   const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage || isShowcasePage);
+
+  useEffect(() => {
+    // Initialize Google Analytics
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+
+    // Log the page view
+    logPageView();
+  }, [router.pathname]); // Track page views on route changes
 
   return (
     <Layout includeNavbar={shouldIncludeNavbarAndFooter} includeFooter={shouldIncludeNavbarAndFooter}>
