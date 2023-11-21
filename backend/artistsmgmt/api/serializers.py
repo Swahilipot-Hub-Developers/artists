@@ -34,3 +34,9 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
             validated_data['password']
         )
         return user
+    
+class ArtistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = '__all__'
+        extra_kwargs = {'user': {'read_only':True}}
