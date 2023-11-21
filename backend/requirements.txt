@@ -5,7 +5,6 @@ charset-normalizer==3.3.2
 click==8.1.7
 Django==4.2.7
 django-cors-headers==4.3.0
-django-faker==0.2
 django-filter==23.3
 django-seed==0.3.1
 djangorestframework==3.14.0
