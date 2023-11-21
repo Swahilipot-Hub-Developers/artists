@@ -1,14 +1,16 @@
 
 from rest_framework import generics, status, permissions
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, ArtistSignUpSerializer
+from .serializers import UserSerializer, ArtistSignUpSerializer, ArtistSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from .permissions import IsArtist
 from rest_framework.response import Response
-from .serializers import UserSerializer
 from rest_framework.views import APIView
+from ..models import Artist, User
+from rest_framework.permissions import IsAuthenticated
 
 class ArtistSignUpView(generics.CreateAPIView):
     serializer_class = ArtistSignUpSerializer
@@ -56,3 +58,20 @@ class ArtistOnlyView(APIView):
     
     def get(self, request, format=None):
         return Response(data={"message":"You are an artist"}, status=status.HTTP_200_OK)
+    
+class ArtistCreateView(generics.ListCreateAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    
+class ArtistRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    
+class ArtistUpdateView(RetrieveUpdateAPIView):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    # permission_classes = [IsAuthenticated]  # Adjust permissions as needed
+
+    def get_object(self):
+        user = self.request.user
+        return Artist.objects.get(user=user)

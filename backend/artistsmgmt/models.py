@@ -17,6 +17,12 @@ class User(AbstractUser):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+        
+@receiver(post_save, sender=User)
+def create_user_artist(sender, instance, created, **kwargs):
+    if created:
+        Artist.objects.create(user=instance, type='default', description='default', skills='default')
+
 
 class Artist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="artist")
