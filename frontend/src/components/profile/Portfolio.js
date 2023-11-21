@@ -1,39 +1,57 @@
 import React from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+
+const images = [
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+  '/assets/images/projects/nicky.jpeg',
+];
+
+const imageStyle = {
+  transition: 'transform 0.3s ease-in-out',
+};
 
 const Portfolio = () => {
-  // Sample data for portfolio items
-  const portfolioItems = [
-    {
-      title: 'Project 1',
-      image: 'path/to/project1-image.jpg',
-      description: 'Description of project 1...',
-      link: 'https://project1-link.com',
-    },
-    // Add more items as needed
-  ];
-
   return (
-    // <div className="mb-5">
-    //   <h2>Portfolio</h2>
-    //   <div className="row">
-    //     {portfolioItems.map((item, index) => (
-    //       <div className="col-md-4 mb-4" key={index}>
-    //         <Card>
-    //           <Card.Img variant="top" src={item.image} />
-    //           <Card.Body>
-    //             <Card.Title>{item.title}</Card.Title>
-    //             <Card.Text>{item.description}</Card.Text>
-    //             <Button variant="primary" href={item.link} target="_blank">
-    //               View Project
-    //             </Button>
-    //           </Card.Body>
-    //         </Card>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
+    <div>
+      <h5 className="display-4 text-primary m-5 text-center">Portfolio</h5>
 
-    <h1>Portfolio</h1>
+      <div className="album py-5 bg-body-tertiary">
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {images.map((image, index) => (
+              <div className="col" key={index}>
+                <div className="card shadow-sm">
+                  <div>
+                    <Image
+                      className="bd-placeholder-img card-img-top"
+                      src={image}
+                      alt={`Image ${index + 1}`}
+                      width={345}
+                      height={240}
+                      style={imageStyle}
+                      onMouseOver={e => {
+                        e.currentTarget.style.transform = 'scale(1.1)';
+                      }}
+                      onMouseOut={e => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
