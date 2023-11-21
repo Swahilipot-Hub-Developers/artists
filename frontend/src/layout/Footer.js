@@ -56,23 +56,21 @@ const Footer = () => {
       <div className="container">
         <img src="/logo/logo.png" className="w-50 mx-auto mb-4 max-w-full" alt="Swahilipot Hub Logo" />
         <p className="lead">
-          Elevating Our artists through Streamlined management and amplifying creativity with our
+          Elevating our artists through streamlined management and amplifying creativity with our
           artist-centric platform.
         </p>
+        <ul className="list-unstyled d-flex flex-wrap justify-content-center mt-4">
+          {footerNavs.map((item, idx) => (
+            <li key={idx} className="mr-3 mb-2" style={{ margin: '0 8px' }}>
+              <a href={item.href || '#'} className="text-decoration-none hover:text-gray-800">
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="list-unstyled d-flex flex-wrap justify-content-center mt-4">
-        {footerNavs.map((item, idx) => (
-          <li key={idx} className="mr-3 mb-2" style={{ margin: '0 8px' }}>
-            <a href={item.href || '#'} className="text-decoration-none hover:text-gray-800">
-              {item.name}
-            </a>
-          </li>
-        ))}
-      </ul>
+
       <div className="container mt-4">
-        <div className="mb-4">
-          &copy; 2023 Swahilipot Hub Artists. All rights reserved.
-        </div>
         <ul className="list-inline mb-0 d-flex justify-content-center">
           {socialMediaLinks.map((social, idx) => (
             <li key={idx} className="list-inline-item">
@@ -82,6 +80,10 @@ const Footer = () => {
             </li>
           ))}
         </ul>
+
+        <div className="mb-4">
+          &copy; 2023 Swahilipot Hub Artists. All rights reserved.
+        </div>
       </div>
     </footer>
   );
