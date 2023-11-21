@@ -67,11 +67,14 @@ class ArtistRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
     
-class ArtistUpdateView(RetrieveUpdateAPIView):
+class ArtistUpdateView(generics.UpdateAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
     # permission_classes = [IsAuthenticated]  # Adjust permissions as needed
 
-    def get_object(self):
-        user = self.request.user
-        return Artist.objects.get(user=user)
+    def patch(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
