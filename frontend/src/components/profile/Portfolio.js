@@ -1,29 +1,35 @@
-import React from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
+import React from "react";
+import Head from "next/head";
+import Image from "next/image";
 
 const images = [
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
-  '/assets/images/projects/nicky.jpeg',
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
+  "/assets/images/projects/nicky.jpeg",
 ];
 
 const imageStyle = {
-  transition: 'transform 0.3s ease-in-out',
+  transition: "transform 0.3s ease-in-out",
 };
 
 const Portfolio = () => {
   return (
-    <div>
+    <div className="bg-body-tertiary">
       <h5 className="display-4 text-primary m-5 text-center">Portfolio</h5>
 
-      <div className="album py-5 bg-body-tertiary">
+      {/* Add a div to contain the buttons */}
+      <div className="container text-center mb-4">
+        <button className="btn btn-primary btn-lg mx-2">Current Works</button>
+        <button className="btn btn-secondary btn-lg mx-2">Previous Works</button>
+      </div>
+
+      <div className="album py-5">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {images.map((image, index) => (
@@ -37,11 +43,11 @@ const Portfolio = () => {
                       width={345}
                       height={240}
                       style={imageStyle}
-                      onMouseOver={e => {
-                        e.currentTarget.style.transform = 'scale(1.1)';
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.transform = "scale(1.1)";
                       }}
-                      onMouseOut={e => {
-                        e.currentTarget.style.transform = 'scale(1)';
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
                       }}
                     />
                   </div>
