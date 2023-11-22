@@ -4,6 +4,12 @@ import Link from "next/link";
 const Customnavbar = () => {
   const [activeLink, setActiveLink] = useState("Home");
 
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -80,14 +86,127 @@ const Customnavbar = () => {
           </ul>
         </div>
       </div>
-      <ul className="d-flex">
-        <li className="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell fs-4"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a>
-        </li>
-      </ul>
+      <div>
+        <div style={{ position: "relative" }}>
+          <img
+            src="profile-picture.jpg"
+            alt="Avatar"
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              marginRight: "8px",
+            }}
+          />
+          <span
+            onClick={toggleDropdown}
+            style={{
+              cursor: "pointer",
+              marginRight: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            John Doe
+          </span>
+          {showDropdown && (
+            <ul
+              className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+              style={{
+                position: "absolute",
+                top: "100%",
+                right: 0,
+                backgroundColor: "#333",
+                padding: "10px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                zIndex: 1000,
+              }}
+            >
+              <li
+                className="dropdown-header"
+                style={{ marginBottom: "10px", textAlign: "center" }}
+              >
+                <h6>Kevin Anderson</h6>
+                <span>Web Designer</span>
+                <hr style={{ color: "white" }}></hr>
+              </li>
+              <li style={{ marginBottom: "10px" }}>
+                <a
+                  className="d-flex"
+                  href="users-profile.html"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "#fff",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.color = "#008060";
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.color = "#fff";
+                  }}
+                >
+                  <i
+                    className="bi bi-person"
+                    style={{ fontSize: "20px", marginRight: "5px" }}
+                  ></i>
+                  <span>Edit Profile</span>
+                </a>
+              </li>
+              <li style={{ marginBottom: "10px" }}>
+                <a
+                  className="d-flex"
+                  href="users-profile.html"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "#fff",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.color = "#008060";
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.color = "#fff";
+                  }}
+                >
+                  <i
+                    className="bi bi-gear"
+                    style={{ fontSize: "20px", marginRight: "5px" }}
+                  ></i>
+                  <span>Account Settings</span>
+                </a>
+              </li>
+              <li style={{ marginBottom: "10px" }}>
+                <a
+                  className="d-flex"
+                  href="#"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "#fff",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.color = "#008060";
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.color = "#fff";
+                  }}
+                >
+                  <i
+                    className="bi bi-box-arrow-right"
+                    style={{ fontSize: "20px", marginRight: "5px" }}
+                  ></i>
+                  <span>Sign Out</span>
+                </a>
+              </li>
+            </ul>
+          )}
+        </div>
+      </div>
     </nav>
   );
 };
