@@ -9,7 +9,7 @@ const Hero = () => {
                         <br />
                         <h2>I'm <span>Jenny Wilson</span> a Professional Photographer from New York City</h2>
                         <p>Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.</p>
-                        <Link href="contact.html" className="btn btn-primary">Available for hire</Link>
+                        <Link href="contact.html" className="btn btn-primary btn-lg mx-2">Available for hire</Link>
                     </div>
 
                     {/* Right Column with Artist Picture */}
