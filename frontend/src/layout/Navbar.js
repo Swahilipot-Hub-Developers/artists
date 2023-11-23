@@ -25,7 +25,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href="portfolio">
+              <Link href="/events">
                 <div className="nav-link scrollto" href="#" target="_blank">
                   Upcoming Events
                 </div>
