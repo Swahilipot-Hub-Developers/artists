@@ -20,8 +20,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href="/">
-                <div className="nav-link scrollto active">Artists</div>
+              <Link href="/featured">
+                <div className="nav-link scrollto active">Featured</div>
               </Link>
             </li>
             <li>
