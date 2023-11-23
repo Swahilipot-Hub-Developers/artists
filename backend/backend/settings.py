@@ -31,16 +31,17 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'warrenshiv.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'rest_framework',
+    'rest_framework',
     'artistsmgmt',
-      'corsheaders',
-      'rest_framework.authtoken'
+    'corsheaders',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# settings.py
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # or the actual URL of your frontend
 ]
@@ -64,6 +63,7 @@ CORS_ALLOWED_ORIGINS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
 }
 

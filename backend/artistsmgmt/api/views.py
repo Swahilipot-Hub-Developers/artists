@@ -43,7 +43,7 @@ class LogoutView(APIView):
     def post(self, request, format=None):
         # simply delete the token to force a login
         request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
+        return Response("Successfully signed out", status=status.HTTP_200_OK)
     
 # class ArtistOnlyView(generics.RetrieveAPIView):
 #     permission_classes = [permissions.IsAuthenticated, IsArtist]
@@ -53,7 +53,7 @@ class LogoutView(APIView):
 #         return self.request.user
 
 class ArtistOnlyView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsArtist]
     serializer_class = UserSerializer
     
     def get(self, request, format=None):

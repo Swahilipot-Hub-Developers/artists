@@ -1,5 +1,5 @@
-from rest_framework.permissions import BasePermission
+from rest_framework import permissions
 
-class IsArtist(BasePermission):
+class IsArtist(permissions.BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user)
+        return request.user.is_authenticated and hasattr(request.user, 'artist')
