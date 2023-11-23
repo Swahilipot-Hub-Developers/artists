@@ -21,10 +21,10 @@ const ContactForm = () => {
 
   return (
     <main className='bg-body-tertiary'>
-      <div class="page-header d-flex align-items-center">
-        <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
+      <div className="page-header d-flex align-items-center">
+        <div className="container position-relative">
+          <div className="row d-flex justify-content-center">
+            <div className="col-lg-6 text-center">
               <h5 className="display-4 text-primary m-5 text-center">Contact</h5>
             </div>
           </div>
