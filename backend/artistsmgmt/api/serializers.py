@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from artistsmgmt.models import User, Artist
+from artistsmgmt.models import User, Artist, Portfolio
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,3 +34,17 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
             validated_data['password']
         )
         return user
+    
+class ArtistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = '__all__'
+        extra_kwargs = {'user': {'read_only':True}}
+        
+        
+class PortfolioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Portfolio
+        fields = '__all__'
+        extra_kwargs = {'artist': {'read_only':True}}
+        

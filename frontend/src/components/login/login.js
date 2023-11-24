@@ -27,7 +27,7 @@ const LoginForm = () => {
         // Successful login handling
         setErrorMessage("");
         // Redirect to a dashboard or profile page after successful login
-        Router.push("/showcase"); // Change '/dashboard' to your desired route
+        Router.push("/profile"); // Change '/dashboard' to your desired route
       } else {
         // Handle other possible responses (e.g., invalid credentials)
         setErrorMessage("Invalid credentials. Please try again.");
