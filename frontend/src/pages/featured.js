@@ -1,4 +1,3 @@
-
 import Head from 'next/head';
 import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,7 +24,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/bahari-brush.jpg"
                     alt="Bahari Brush"
                     width={300}
                     height={300}
@@ -42,7 +41,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/blue-band.jpg"
                     alt="Blue Band"
                     width={300}
                     height={300}
@@ -59,7 +58,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/producer.jpg"
                     alt="Drummer Beats"
                     width={300}
                     height={300}
@@ -76,7 +75,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/Wale-Nisi.jpg"
                     alt="Wale Nisi"
                     width={300}
                     height={300}
@@ -93,7 +92,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/sauti-nene.jpg"
                     alt="Sauti Nene"
                     width={300}
                     height={300}
@@ -110,7 +109,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/dap-keys.jpg"
                     alt="Dap Keys"
                     width={300}
                     height={300}
@@ -127,7 +126,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/drummer-blue.jpg"
                     alt="Kulturez"
                     width={300}
                     height={300}
@@ -144,7 +143,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/cula-gang.jpg"
                     alt="Cula Gang"
                     width={300}
                     height={300}
@@ -161,7 +160,7 @@ const FeaturedArtists = () => {
               <div className="col mb-4">
                 <div className="card h-100">
                   <Image
-                    src=""
+                    src="/featured/nimashe.jpg"
                     alt="Nimashe"
                     width={300}
                     height={300}
@@ -178,13 +177,15 @@ const FeaturedArtists = () => {
         </div>
       </main>
 
-      <div id="totop">
-        <a href="" className="active">
+      <div id="totop" className="d-flex justify-content-center mt-4">
+        {/* Centered "Back To Top" button */}
+        <a href="#" className="active">
           Back To Top
         </a>
       </div>
     </div>
   );
+
 };
 
 export default FeaturedArtists;
