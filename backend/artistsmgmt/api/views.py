@@ -90,12 +90,13 @@ class ArtistUpdateView(generics.UpdateAPIView):
 
 
 class PortfolioListCreateAPIView(APIView):
-    permission_classes = [IsAdminUser]
 
     def get(self, request):
         portfolios = Portfolio.objects.all()
         serializer = PortfolioSerializer(portfolios, many=True)
         return Response(serializer.data)
+    
+    permission_classes = [IsAdminUser]
 
     def post(self, request):
         serializer = PortfolioSerializer(data=request.data)
@@ -105,7 +106,7 @@ class PortfolioListCreateAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PortfolioDetailAPIView(APIView):
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
 
     def get_object(self, pk):
         try:
@@ -117,6 +118,8 @@ class PortfolioDetailAPIView(APIView):
         portfolio = self.get_object(pk)
         serializer = PortfolioSerializer(portfolio)
         return Response(serializer.data)
+    
+    permission_classes = [IsAdminUser]
 
     def put(self, request, pk):
         portfolio = self.get_object(pk)
