@@ -69,7 +69,7 @@ const MyForm = () => {
     e.preventDefault();
 
     if (validateForm()) {
-  
+
       console.log('Form submitted with data:', formData);
     } else {
       console.log('Form has errors. Please fix them.');
@@ -79,34 +79,32 @@ const MyForm = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <form style={{ width: '300px' }} onSubmit={handleSubmit}>
+        <h1 style={{ fontSize: '24px', color: '#0000FF', textAlign: 'center', marginBottom: '20px' }}> About</h1>
         <div className="mb-3">
           <label htmlFor="exampleInputFullName" className="form-label">FullName</label>
-          <input type="text" className="form-control" id="exampleInputFullName" aria-describedby="FullNamelHelp" onChange={handleChange} name="FullName"/>
+          <input type="text" className="form-control" id="exampleInputFullName" aria-describedby="FullNamelHelp" onChange={handleChange} name="FullName" />
           {errors.FullName && <div className="text-danger"></div>}
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} name="email"/>
-          {errors.email && <div className="text-danger"></div>}
-          <div id="emailHelp" className="form-text"></div>
+          <label htmlForfor="inputNumber" className="form-label">Picture Upload</label>
+          <div className="col-sm-12">
+            <input className="form-control" type="file" id="formFile" />
+          </div>
         </div>
 
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword" className="form-label">Password</label>
-          <input type="password" className="form-control" id="exampleInputPassword" onChange={handleChange} name="password"/>
-          {errors.password && <div className="text-danger"></div>}
+          <label htmlForfor="inputNumber" className="form-label">Video Upload</label>
+          <div className="col-sm-12">
+            <input className="form-control" type="file" id="formFile" />
+          </div>
         </div>
-
-
         <div className="mb-3">
-          <label htmlFor="exampleInputSkillsTalents" className="form-label">Skills/Talents</label>
-          <input type="text" className="form-control" id="exampleInputSkillsTalents" onChange={handleChange} name="skills"/>
-          {errors.skills && <div className="text-danger"></div>}
+          <label htmlFor="exampleInputDescription" className="form-label">Description</label>
+          <input type="Description" className="form-control" id="exampleInputDescription" onChange={handleChange} name="Description" />
+          {errors.Description && <div className="text-danger"></div>}
         </div>
 
-      
-
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Save Changes</button>
       </form>
     </div>
   );
