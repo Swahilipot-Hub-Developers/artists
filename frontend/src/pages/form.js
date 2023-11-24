@@ -11,6 +11,8 @@ const MyForm = () => {
     talents: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,10 +20,60 @@ const MyForm = () => {
     });
   };
 
+  const validateForm = () => {
+    let formIsValid = true;
+    let newErrors = {};
+    if (!formData.FullName.trim()) {
+      formIsValid = false;
+      newErrors = {
+        ...newErrors,
+        FullName: 'Full Name is required',
+      };
+    }
+    if (!formData.email.trim()) {
+      formIsValid = false;
+      newErrors = {
+        ...newErrors,
+        email: 'Email is required',
+      };
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        formIsValid = false;
+        newErrors = {
+          ...newErrors,
+          email: 'Invalid email address',
+        };
+      }
+    }
+    if (formData.password.length < 6) {
+      formIsValid = false;
+      newErrors = {
+        ...newErrors,
+        password: 'Password must be at least 6 characters long',
+      };
+    }
+    if (!formData.skills.trim()) {
+      formIsValid = false;
+      newErrors = {
+        ...newErrors,
+        skills: 'Skills/Talents is required',
+      };
+    }
+
+    setErrors(newErrors);
+    return formIsValid;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add your form submission logic here
-    console.log('Form submitted with data:', formData);
+
+    if (validateForm()) {
+  
+      console.log('Form submitted with data:', formData);
+    } else {
+      console.log('Form has errors. Please fix them.');
+    }
   };
 
   return (
@@ -29,30 +81,31 @@ const MyForm = () => {
       <form style={{ width: '300px' }} onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputFullName" className="form-label">FullName</label>
-          <input type="text" className="form-control" id="exampleInputFullName" aria-describedby="FullNamelHelp" onChange={handleChange} name="FullName" value={formData.FullName} />
+          <input type="text" className="form-control" id="exampleInputFullName" aria-describedby="FullNamelHelp" onChange={handleChange} name="FullName"/>
+          {errors.FullName && <div className="text-danger"></div>}
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} name="email" value={formData.email} />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} name="email"/>
+          {errors.email && <div className="text-danger"></div>}
+          <div id="emailHelp" className="form-text"></div>
         </div>
 
         <div className="mb-3">
-          <label htmlFor="exampleInputType" className="form-label">Type</label>
-          <input type="text" className="form-control" id="exampleInputType" onChange={handleChange} name="type" value={formData.type} />
+          <label htmlFor="exampleInputPassword" className="form-label">Password</label>
+          <input type="password" className="form-control" id="exampleInputPassword" onChange={handleChange} name="password"/>
+          {errors.password && <div className="text-danger"></div>}
         </div>
+
+
         <div className="mb-3">
-          <label htmlFor="exampleInputDescription" className="form-label">Description</label>
-          <textarea className="form-control" id="exampleInputDescription" rows="3" onChange={handleChange} name="description" value={formData.description}></textarea>
+          <label htmlFor="exampleInputSkillsTalents" className="form-label">Skills/Talents</label>
+          <input type="text" className="form-control" id="exampleInputSkillsTalents" onChange={handleChange} name="skills"/>
+          {errors.skills && <div className="text-danger"></div>}
         </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputSkills/Talents" className="form-label">Skills/Talents</label>
-          <input type="text" className="form-control" id="exampleInputSkillsTalents" onChange={handleChange} name="skills/talents" value={formData.talents} />
-        </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-        </div>
+
+      
+
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </div>
@@ -60,6 +113,7 @@ const MyForm = () => {
 };
 
 export default MyForm;
+
 
 
 
