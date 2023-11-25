@@ -2,14 +2,14 @@
 from rest_framework import generics, status, permissions
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, ArtistSignUpSerializer, ArtistSerializer, PortfolioSerializer
+from .serializers import UserSerializer, ArtistSignUpSerializer, ArtistSerializer, PortfolioSerializer, FeaturedArtistSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from .permissions import IsArtist
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from ..models import Artist, User, Portfolio
+from ..models import Artist, User, Portfolio, FeaturedArtists
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
@@ -95,7 +95,7 @@ class PortfolioListCreateAPIView(APIView):
         portfolios = Portfolio.objects.all()
         serializer = PortfolioSerializer(portfolios, many=True)
         return Response(serializer.data)
-    
+
     permission_classes = [IsAdminUser]
 
     def post(self, request):
@@ -104,6 +104,7 @@ class PortfolioListCreateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PortfolioDetailAPIView(APIView):
     # permission_classes = [IsAdminUser]
@@ -118,7 +119,7 @@ class PortfolioDetailAPIView(APIView):
         portfolio = self.get_object(pk)
         serializer = PortfolioSerializer(portfolio)
         return Response(serializer.data)
-    
+
     permission_classes = [IsAdminUser]
 
     def put(self, request, pk):
@@ -133,3 +134,16 @@ class PortfolioDetailAPIView(APIView):
         portfolio = self.get_object(pk)
         portfolio.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# FeaturedArtists
+class FeaturedArtistsListCreateView(generics.ListCreateAPIView):
+    queryset = FeaturedArtists.objects.all()
+    serializer_class = FeaturedArtistSerializer
+    # permission_classes = [permissions.IsAdminUser]
+
+
+class FeaturedArtistsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = FeaturedArtists.objects.all()
+    serializer_class = FeaturedArtistSerializer
+    permission_classes = [permissions.IsAdminUser]

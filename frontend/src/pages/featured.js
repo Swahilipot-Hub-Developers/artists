@@ -1,65 +1,28 @@
-import Head from 'next/head';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const artistsData = [
-  {
-    imageSrc: '/featured/bahari-brush.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/blue-band.jpg',
-    alt: 'Blue Band',
-    name: 'Blue Band',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/producer.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/Wale-Nisi.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/sauti-nene.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/dap-keys.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/drummer-blue.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/cula-gang.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-  {
-    imageSrc: '/featured/nimashe.jpg',
-    alt: 'Bahari Brush',
-    name: 'Bahari Brush',
-    profession: 'Canvas Painter',
-  },
-];
-
 const FeaturedArtists = () => {
+  const [artistsData, setArtistsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/featured-artists');
+        if (response.status === 200) {
+          setArtistsData(response.data);
+        } else {
+          throw new Error('Failed to fetch data');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <main id="main-content" className="wrapper">
@@ -73,7 +36,7 @@ const FeaturedArtists = () => {
                 <div className="col mb-4" key={index}>
                   <div className="card h-100">
                     <Image
-                      src={artist.imageSrc}
+                      src={artist.photo}
                       alt={artist.alt}
                       width={300}
                       height={300}
