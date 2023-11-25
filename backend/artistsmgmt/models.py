@@ -47,3 +47,28 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return f"{self.artist.user.username}'s Portfolio"
+
+
+# Featured Artists
+class FeaturedArtists(models.Model):
+    selected_artist = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
+    profession = models.CharField(max_length=100, null=True, blank=True)
+    photo = models.ImageField(
+        upload_to='featured_photos/', null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.selected_artist.artist.user.username}"
+
+
+@receiver(post_save, sender=FeaturedArtists)
+def update_featured_artist_fields(sender, instance, created, **kwargs):
+    if created and instance.selected_artist:
+        # Fetch the associated Portfolio instance
+        portfolio_of_selected_artist = instance.selected_artist
+        
+        # Update FeaturedArtists fields with Portfolio data
+        instance.profession = portfolio_of_selected_artist.profession
+        instance.photo = portfolio_of_selected_artist.photo  # Assuming photo is an ImageField in Portfolio
+        
+        # Save the updated FeaturedArtists instance
+        instance.save()
