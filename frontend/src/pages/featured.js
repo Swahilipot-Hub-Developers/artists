@@ -36,14 +36,14 @@ const FeaturedArtists = () => {
                 <div className="col mb-4" key={index}>
                   <div className="card h-100">
                     <Image
-                      src={artist.photo}
-                      alt={artist.alt}
+                      src={`http://127.0.0.1:8000${artist.photo}`} 
+                      alt={artist.selected_artist_name}
                       width={300}
                       height={300}
                       className="card-img-top"
                     />
                     <div className="card-body">
-                      <h2 className="card-title">{artist.name}</h2>
+                      <h2 className="card-title">{artist.selected_artist_name}</h2>
                       <p className="card-text">{artist.profession}</p>
                     </div>
                   </div>

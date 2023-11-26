@@ -96,7 +96,7 @@ class PortfolioListCreateAPIView(APIView):
         serializer = PortfolioSerializer(portfolios, many=True)
         return Response(serializer.data)
 
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
 
     def post(self, request):
         serializer = PortfolioSerializer(data=request.data)
