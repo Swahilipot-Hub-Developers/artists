@@ -43,7 +43,7 @@ class Portfolio(models.Model):
     artist = models.ForeignKey('artistsmgmt.Artist', on_delete=models.CASCADE)
     profession = models.CharField(max_length=100)
     photo = models.ImageField(
-        upload_to='portfolio', null=True, blank=True)
+        upload_to='portfolio/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.artist.user.username}'s Portfolio"
@@ -72,3 +72,15 @@ def update_featured_artist_fields(sender, instance, created, **kwargs):
         
         # Save the updated FeaturedArtists instance
         instance.save()
+
+
+# Upcoming Events
+
+class UpcomingEvents(models.Model):
+    title = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    time = models.DateTimeField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
