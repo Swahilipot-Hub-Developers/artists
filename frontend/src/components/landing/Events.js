@@ -21,7 +21,7 @@ const UpcomingEventsPage = () => {
   return (
     <div className="bg-body-tertiary">
       <section className="container py-5">
-        <h1 className="mb-4">Upcoming Events</h1>
+        <h1 className="mb-4" style={{color : '#5c8eb0'}}>Upcoming Events</h1>
 
         <div className="row">
           {upcomingEvents.map((event) => (
