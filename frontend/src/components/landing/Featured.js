@@ -26,41 +26,140 @@ const FeaturedArtists = () => {
   }, []);
 
   return (
-    <div>
-      <main id="main-content" className="wrapper">
-        <div className="container">
-          <div>
-            <h1 className="mb-4">Explore Our Featured Artists</h1>
-          </div>
-          <div className="single-area">
-            {/* Artist blocks */}
-            <div className="row row-cols-1 row-cols-md-3 g-4">
-              {artistsData.map((artist, index) => (
-                <div className="col mb-4" key={index}>
-                  <div className="card h-100">
-                    {/* Add logic to display the photo if available */}
-                    {artist.photo && (
-                      <Image
-                        src={`http://127.0.0.1:8000${artist.photo}`} 
-                        className="card-img-top"
-                        width={300}
-                        height={300}
-                        alt={artist.selected_artist_name}
-                      />
-                    )}
-                    <div className="card-body">
-                      <h2 className="card-title">
-                        {artist.selected_artist_name}
-                      </h2>
-                      <p className="card-text">{artist.profession}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className="container">
+      <div className="row">
+        <div>
+          <h1 className="mb-4" style={{ color: "#5c8eb0" }}>
+            Explore Our Featured Artists
+          </h1>
         </div>
-      </main>
+      </div>
+      <div className="row align-items-end gx-2 gx-lg-3 mb-2 mb-lg-3">
+        <div
+          className="col-3 d-none d-md-block"
+          style={{ marginBottom: "-5rem" }}
+        >
+          {artistsData.length > 0 && (
+            <div className="card mb-3">
+              <Image
+                src={`http://127.0.0.1:8000${artistsData[0].photo}`}
+                className="card-img-top img-fluid w-100"
+                alt={artistsData[0].selected_artist_name}
+                width={364}
+                height={268}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  {artistsData[0].selected_artist_name}
+                </h5>
+                <p className="card-text">{artistsData[0].profession}</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="col-6 col-md-3">
+          {artistsData.length > 1 && (
+            <div className="card mb-3">
+              <Image
+                src={`http://127.0.0.1:8000${artistsData[1].photo}`}
+                className="card-img-top img-fluid w-100"
+                alt={artistsData[1].selected_artist_name}
+                width={265}
+                height={290}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  {artistsData[1].selected_artist_name}
+                </h5>
+                <p className="card-text">{artistsData[1].profession}</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="col-6 col-md-3">
+          {artistsData.length > 2 && (
+            <div className="card mb-3">
+              <Image
+                src={`http://127.0.0.1:8000${artistsData[2].photo}`}
+                className="card-img-top img-fluid w-100"
+                alt={artistsData[2].selected_artist_name}
+                width={387}
+                height={290}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  {artistsData[2].selected_artist_name}
+                </h5>
+                <p className="card-text">{artistsData[2].profession}</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <div
+          className="col-3 d-none d-md-block"
+          style={{ marginBottom: "-5rem" }}
+        >
+          {artistsData.length > 3 && (
+            <div className="card mb-3">
+              <Image
+                src={`http://127.0.0.1:8000${artistsData[3].photo}`}
+                className="card-img-top img-fluid w-100"
+                alt={artistsData[3].selected_artist_name}
+                width={364}
+                height={268}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  {artistsData[3].selected_artist_name}
+                </h5>
+                <p className="card-text">{artistsData[3].profession}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      {/* End Row */}
+      <div className="row gx-2 gx-lg-3">
+        <div className="col-6 col-md-3 offset-md-3">
+          {artistsData.length > 4 && (
+            <div className="card mb-3">
+              <Image
+                src={`http://127.0.0.1:8000${artistsData[4].photo}`}
+                className="card-img-top img-fluid w-100"
+                alt={artistsData[4].selected_artist_name}
+                width={387}
+                height={290}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  {artistsData[4].selected_artist_name}
+                </h5>
+                <p className="card-text">{artistsData[4].profession}</p>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="col-6 col-md-3">
+          {artistsData.length > 5 && (
+            <div className="card mb-3">
+              <Image
+                src={`http://127.0.0.1:8000${artistsData[5].photo}`}
+                className="card-img-top img-fluid w-100"
+                alt={artistsData[5].selected_artist_name}
+                width={265}
+                height={290}
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  {artistsData[5].selected_artist_name}
+                </h5>
+                <p className="card-text">{artistsData[5].profession}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      {/* End Row */}
     </div>
   );
 };
