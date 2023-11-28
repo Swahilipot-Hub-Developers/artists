@@ -2650,7 +2650,7 @@ body {
   
   #portfolio .portfolio-item {
     position: relative;
-    height: 360px;
+    height: 550px;
     overflow: hidden;
   }
   
@@ -2722,7 +2722,7 @@ body {
   }
   
   #portfolio .portfolio-item .portfolio-info {
-    background: #fff;
+    /* background: #fff; */
     text-align: center;
     padding: 30px;
     height: 90px;
