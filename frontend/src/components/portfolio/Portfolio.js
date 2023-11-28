@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+} from "next-share";
 
 import Link from "next/link";
 
@@ -107,7 +112,16 @@ const Portfolio = () => {
     // ... (your original list of artists)
   ];
 
-  const [artists, setArtists] = useState(originalArtists);
+  const [artists, setArtists] = useState(
+    originalArtists.map((artist) => ({
+      ...artist,
+      likeCount: 0,
+      commentCount: 0,
+      showCommentInput: false,
+      showShareOptions: false,
+    }))
+  );
+  
   const [searchValue, setSearchValue] = useState("");
 
   const handleKeyUp = () => {
@@ -126,12 +140,39 @@ const Portfolio = () => {
 
   const [showCommentInput, setShowCommentInput] = useState(false);
 
-  const toggleCommentInput = () => {
-    setShowCommentInput(!showCommentInput);
+  // const toggleCommentInput = (index) => {
+  //   const updatedArtists = artists.map((artist, i) =>
+  //     i === index
+  //       ? { ...artist, showCommentInput: !artist.showCommentInput }
+  //       : artist
+  //   );
+  //   setArtists(updatedArtists);
+  // };
+
+  // Function to increment like count for a specific artist
+  const handleLike = (index) => {
+    const updatedArtists = artists.map((artist, i) =>
+      i === index ? { ...artist, likeCount: artist.likeCount + 1 } : artist
+    );
+    setArtists(updatedArtists);
   };
 
-  const handleLike = () => {
-    // Handle like functionality
+  const incrementCommentCount = (index) => {
+    const updatedArtists = artists.map((artist, i) =>
+      i === index
+        ? { ...artist, commentCount: artist.commentCount + 1 }
+        : artist
+    );
+    setArtists(updatedArtists);
+  };
+
+  const [showShareOptions, setShowShareOptions] = useState(false); // State to control showing/hiding share options
+
+  const handleShareClick = (index) => {
+    const updatedArtists = [...artists];
+    updatedArtists[index].showShareOptions =
+      !updatedArtists[index].showShareOptions;
+    setArtists(updatedArtists);
   };
 
   return (
@@ -245,23 +286,63 @@ const Portfolio = () => {
                           <button
                             type="button"
                             className="btn btn-outline-primary btn-sm"
-                            // onClick={handleLike}
+                            onClick={() => handleLike(index)}
                           >
-                            <i className="bi bi-hand-thumbs-up"></i> Like
+                            <i className="bi bi-hand-thumbs-up"></i>{" "}
+                            <span className="like-count">
+                              {artist.likeCount}
+                            </span>{" "}
+                            Likes
                           </button>
                           <button
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
-                            onClick={toggleCommentInput}
+                            onClick={() => {
+                              const updatedArtists = [...artists];
+                              updatedArtists[index].showCommentInput =
+                                !updatedArtists[index].showCommentInput;
+                              setArtists(updatedArtists);
+                            }}
                           >
-                            <i className="bi bi-chat"></i> Comment
+                            <i className="bi bi-chat"></i>{" "}
+                            <span className="comment-count">
+                              {artist.commentCount}
+                            </span>{" "}
+                            Comments
                           </button>
                           <button
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
+                            onClick={() => handleShareClick(index)}
                           >
                             <i className="bi bi-share"></i> Share
                           </button>
+                          {/* Conditionally render the share options */}
+                          {artist.showShareOptions && (
+                            <div className="share-options-popup">
+                              <div className="share-card">
+                                <TwitterShareButton
+                                  url={`https://your-website-url.com/artist/${artist.name}`}
+                                  title={`Check out ${artist.name}'s profile on Twitter!`}
+                                >
+                                  <i className="bi bi-twitter">Twitter</i>
+                                </TwitterShareButton>
+                                <FacebookShareButton
+                                  url={`https://your-website-url.com/artist/${artist.name}`}
+                                  quote={`Check out ${artist.name}'s profile on Facebook!`}
+                                >
+                                  <i className="bi bi-facebook">Facebook</i>
+                                </FacebookShareButton>
+                                <LinkedinShareButton
+                                  url={`https://your-website-url.com/artist/${artist.name}`}
+                                  title={`Check out ${artist.name}'s profile on LinkedIn!`}
+                                >
+                                  <i className="bi bi-linkedin">Linkedin</i>
+                                </LinkedinShareButton>
+                                {/* Add other share options similarly */}
+                              </div>
+                            </div>
+                          )}
                         </div>
                         <div className="portfolio-info">
                           <h4>{artist.name}</h4>
@@ -273,11 +354,16 @@ const Portfolio = () => {
                         {/* Comment input */}
                         <div
                           style={{
-                            display: showCommentInput ? "block" : "none",
+                            display: artist.showCommentInput ? "block" : "none", // Use artist's showCommentInput state
                             marginTop: "10px",
                           }}
                         >
-                          <form>
+                          <form
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              incrementCommentCount(index);
+                            }}
+                          >
                             <div className="mb-3">
                               <textarea
                                 className="form-control"

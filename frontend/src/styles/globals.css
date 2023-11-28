@@ -1,80 +1,100 @@
 main {
-    min-height: 75vh;
+  min-height: 75vh;
 }
 
 /* globals.css */
 
 /* Section Style */
 .sectionStyle {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    padding: 0;
-    overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
 }
 
 /* Overlay Style */
 .heroproj-overlay {
-    content: "";
-    background: rgba(13, 20, 26, 0.5);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+  content: "";
+  background: rgba(13, 20, 26, 0.5);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 /* Container Style */
 .heroproj-container {
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    z-index: 2;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 2;
 }
 
 /* H1 Style */
 .heroproj-container h1 {
-    margin: 0 0 10px 0;
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 56px;
-    text-transform: uppercase;
-    color: #fff;
+  margin: 0 0 10px 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 /* H2 Style */
 .heroproj-container h2 {
-    color: #eee;
-    margin-bottom: 50px;
-    font-size: 24px;
+  color: #eee;
+  margin-bottom: 50px;
+  font-size: 24px;
 }
 
 /* Button Style */
 .btn-get-started {
-    font-family: "Open Sans", sans-serif;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 14px;
-    display: inline-block;
-    padding: 10px 35px;
-    border-radius: 4px;
-    transition: 0.5s;
-    color: #fff;
-    background: #ff4a17;
-    border: 2px solid #ff4a17;
-    text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-block;
+  padding: 10px 35px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff;
+  background: #ff4a17;
+  border: 2px solid #ff4a17;
+  text-decoration: none;
 }
 
 /* Button Hover Style */
 .btn-get-started:hover {
-    border-color: #fff;
-    background: black;
+  border-color: #fff;
+  background: black;
+}
+
+.share-options-popup {
+  position: absolute;
+  top: 70%;
+  left: 78%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 999;
+}
+
+.share-card {
+  display: flex;
+  flex-direction: column; /* Display options vertically */
+  gap: 10px; /* Add some space between the options */
+  align-items: center;
+  margin-right: 10px;
 }
