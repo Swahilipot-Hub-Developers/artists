@@ -143,3 +143,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ACCOUNT_UNIQUE_EMAIL = True
 
 AUTH_USER_MODEL = 'artistsmgmt.User'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+
+import os
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+ROOT_URLCONF = 'backend.urls'

@@ -124,6 +124,16 @@ const Portfolio = () => {
     setArtists(originalArtists);
   };
 
+  const [showCommentInput, setShowCommentInput] = useState(false);
+
+  const toggleCommentInput = () => {
+    setShowCommentInput(!showCommentInput);
+  };
+
+  const handleLike = () => {
+    // Handle like functionality
+  };
+
   return (
     <>
       <main id="main">
@@ -208,12 +218,87 @@ const Portfolio = () => {
                         />
                       </Link>
                     </figure>
-                    <div className="portfolio-info">
-                      <h4>{artist.name}</h4>
-                      <hr
-                        style={{ borderTop: "2px solid ", width: "100%" }}
-                      ></hr>
-                      <p>{artist.profession}</p>
+                    {/* Comment Section */}
+                    <div
+                      style={{
+                        border: "1px solid #ddd",
+                        borderRadius: "8px",
+                        padding: "10px",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {/* Single Comment */}
+                      <div
+                        style={{
+                          borderBottom: "1px solid #eee",
+                          paddingBottom: "10px",
+                        }}
+                      >
+                        {/* Like & Comment buttons */}
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
+                          <button
+                            type="button"
+                            className="btn btn-outline-primary btn-sm"
+                            // onClick={handleLike}
+                          >
+                            <i className="bi bi-hand-thumbs-up"></i> Like
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-sm"
+                            onClick={toggleCommentInput}
+                          >
+                            <i className="bi bi-chat"></i> Comment
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-sm"
+                          >
+                            <i className="bi bi-share"></i> Share
+                          </button>
+                        </div>
+                        <div className="portfolio-info">
+                          <h4>{artist.name}</h4>
+                          {/* <hr
+                            style={{ borderTop: "2px solid ", width: "100%" }}
+                          ></hr> */}
+                          <p>{artist.profession}</p>
+                        </div>
+                        {/* Comment input */}
+                        <div
+                          style={{
+                            display: showCommentInput ? "block" : "none",
+                            marginTop: "10px",
+                          }}
+                        >
+                          <form>
+                            <div className="mb-3">
+                              <textarea
+                                className="form-control"
+                                rows="3"
+                                placeholder="Write a comment..."
+                              ></textarea>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                              }}
+                            >
+                              <button type="submit" className="btn btn-primary">
+                                Post
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      {/* Repeat this structure for multiple comments */}
                     </div>
                   </div>
                 </div>
