@@ -107,7 +107,14 @@ const Portfolio = () => {
     // ... (your original list of artists)
   ];
 
-  const [artists, setArtists] = useState(originalArtists);
+  const [artists, setArtists] = useState(
+    originalArtists.map((artist) => ({
+      ...artist,
+      likeCount: 0,
+      commentCount: 0,
+      showCommentInput: false,
+    }))
+  );
   const [searchValue, setSearchValue] = useState("");
 
   const handleKeyUp = () => {
@@ -126,12 +133,30 @@ const Portfolio = () => {
 
   const [showCommentInput, setShowCommentInput] = useState(false);
 
-  const toggleCommentInput = () => {
-    setShowCommentInput(!showCommentInput);
+  // const toggleCommentInput = (index) => {
+  //   const updatedArtists = artists.map((artist, i) =>
+  //     i === index
+  //       ? { ...artist, showCommentInput: !artist.showCommentInput }
+  //       : artist
+  //   );
+  //   setArtists(updatedArtists);
+  // };
+
+  // Function to increment like count for a specific artist
+  const handleLike = (index) => {
+    const updatedArtists = artists.map((artist, i) =>
+      i === index ? { ...artist, likeCount: artist.likeCount + 1 } : artist
+    );
+    setArtists(updatedArtists);
   };
 
-  const handleLike = () => {
-    // Handle like functionality
+  const incrementCommentCount = (index) => {
+    const updatedArtists = artists.map((artist, i) =>
+      i === index
+        ? { ...artist, commentCount: artist.commentCount + 1 }
+        : artist
+    );
+    setArtists(updatedArtists);
   };
 
   return (
@@ -245,16 +270,29 @@ const Portfolio = () => {
                           <button
                             type="button"
                             className="btn btn-outline-primary btn-sm"
-                            // onClick={handleLike}
+                            onClick={() => handleLike(index)}
                           >
-                            <i className="bi bi-hand-thumbs-up"></i> Like
+                            <i className="bi bi-hand-thumbs-up"></i>{" "}
+                            <span className="like-count">
+                              {artist.likeCount}
+                            </span>{" "}
+                            Likes
                           </button>
                           <button
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
-                            onClick={toggleCommentInput}
+                            onClick={() => {
+                              const updatedArtists = [...artists];
+                              updatedArtists[index].showCommentInput =
+                                !updatedArtists[index].showCommentInput;
+                              setArtists(updatedArtists);
+                            }}
                           >
-                            <i className="bi bi-chat"></i> Comment
+                            <i className="bi bi-chat"></i>{" "}
+                            <span className="comment-count">
+                              {artist.commentCount}
+                            </span>{" "}
+                            Comments
                           </button>
                           <button
                             type="button"
@@ -273,11 +311,16 @@ const Portfolio = () => {
                         {/* Comment input */}
                         <div
                           style={{
-                            display: showCommentInput ? "block" : "none",
+                            display: artist.showCommentInput ? "block" : "none", // Use artist's showCommentInput state
                             marginTop: "10px",
                           }}
                         >
-                          <form>
+                          <form
+                            onSubmit={(e) => {
+                              e.preventDefault();
+                              incrementCommentCount(index);
+                            }}
+                          >
                             <div className="mb-3">
                               <textarea
                                 className="form-control"
