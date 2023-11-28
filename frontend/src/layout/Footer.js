@@ -54,7 +54,7 @@ const Footer = () => {
   return (
     <footer className="text-gray-500 bg-white px-4 py-3 max-w-screen-xl mx-auto md:px-8 text-center">
       <div className="container">
-        <img src="/logo/logo.png" className="w-50 mx-auto mb-4 max-w-full" alt="Swahilipot Hub Logo" />
+        <img src="/logo/logo.png" className="w-25 mx-auto mb-4 max-w-full" alt="Swahilipot Hub Logo" />
         <p className="lead">
           Elevating our artists through streamlined management and amplifying creativity with our
           artist-centric platform.
