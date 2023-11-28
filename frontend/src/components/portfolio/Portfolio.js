@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+} from "next-share";
 
 import Link from "next/link";
 
@@ -113,8 +118,10 @@ const Portfolio = () => {
       likeCount: 0,
       commentCount: 0,
       showCommentInput: false,
+      showShareOptions: false,
     }))
   );
+  
   const [searchValue, setSearchValue] = useState("");
 
   const handleKeyUp = () => {
@@ -156,6 +163,15 @@ const Portfolio = () => {
         ? { ...artist, commentCount: artist.commentCount + 1 }
         : artist
     );
+    setArtists(updatedArtists);
+  };
+
+  const [showShareOptions, setShowShareOptions] = useState(false); // State to control showing/hiding share options
+
+  const handleShareClick = (index) => {
+    const updatedArtists = [...artists];
+    updatedArtists[index].showShareOptions =
+      !updatedArtists[index].showShareOptions;
     setArtists(updatedArtists);
   };
 
@@ -297,9 +313,36 @@ const Portfolio = () => {
                           <button
                             type="button"
                             className="btn btn-outline-secondary btn-sm"
+                            onClick={() => handleShareClick(index)}
                           >
                             <i className="bi bi-share"></i> Share
                           </button>
+                          {/* Conditionally render the share options */}
+                          {artist.showShareOptions && (
+                            <div className="share-options-popup">
+                              <div className="share-card">
+                                <TwitterShareButton
+                                  url={`https://your-website-url.com/artist/${artist.name}`}
+                                  title={`Check out ${artist.name}'s profile on Twitter!`}
+                                >
+                                  <i className="bi bi-twitter">Twitter</i>
+                                </TwitterShareButton>
+                                <FacebookShareButton
+                                  url={`https://your-website-url.com/artist/${artist.name}`}
+                                  quote={`Check out ${artist.name}'s profile on Facebook!`}
+                                >
+                                  <i className="bi bi-facebook">Facebook</i>
+                                </FacebookShareButton>
+                                <LinkedinShareButton
+                                  url={`https://your-website-url.com/artist/${artist.name}`}
+                                  title={`Check out ${artist.name}'s profile on LinkedIn!`}
+                                >
+                                  <i className="bi bi-linkedin">Linkedin</i>
+                                </LinkedinShareButton>
+                                {/* Add other share options similarly */}
+                              </div>
+                            </div>
+                          )}
                         </div>
                         <div className="portfolio-info">
                           <h4>{artist.name}</h4>
