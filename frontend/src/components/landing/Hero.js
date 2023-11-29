@@ -1,18 +1,38 @@
-// Hero.js
-
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
+    const images = [
+        'assets/images/projects/homepage1.jpg',
+        'assets/images/projects/homepage2.jpg',
+        'assets/images/projects/homepage3.jpg',
+        'assets/images/projects/homepage4.jpg',
+        'assets/images/projects/homepage5.jpg',
+        'assets/images/projects/homepage6.jpg',
+        // Add more image paths as needed
+    ];
+
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
     const imageContainerStyle = {
         width: '100%',
         height: '100%',
-        backgroundImage: 'url("assets/images/projects/Image_30.jpg")',
+        backgroundImage: `url("${images[currentImageIndex]}")`,
         backgroundPosition: 'top center',
         backgroundSize: 'cover',
         position: 'absolute',
         zIndex: 0,
     };
+
+    useEffect(() => {
+        // Change image every 3 seconds (3000 milliseconds)
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 5000);
+
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+    }, [currentImageIndex, images.length]);
 
     return (
         <section id='heroproj' className='sectionStyle'>
