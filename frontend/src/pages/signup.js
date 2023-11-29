@@ -206,12 +206,9 @@ const SignUpForm = () => {
 
                         <div className="d-flex align-items-center justify-content-center pb-4">
                           <p className="mb-0 me-2">Already have an account?</p>
-                          <button
-                            type="submit"
-                            className="btn btn-outline-danger"
-                          >
+                          <a href="/signup" className="btn btn-outline-danger">
                             Log In
-                          </button>
+                          </a>
                         </div>
                       </form>
                     </div>
