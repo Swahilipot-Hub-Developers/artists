@@ -117,9 +117,9 @@ const LoginForm = () => {
                             <a className="text-muted" href="#!">
                               Forgot password?
                             </a>
-                            <button type="button" className="btn btn-link">
+                            <a href="/signup" className="btn btn-link">
                               Create new account
-                            </button>
+                            </a>
                           </div>
                         </div>
                       </form>
