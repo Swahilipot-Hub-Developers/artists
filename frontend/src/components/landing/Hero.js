@@ -25,10 +25,10 @@ const Hero = () => {
     };
 
     useEffect(() => {
-        // Change image every 3 seconds (3000 milliseconds)
+        
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
+        }, 1000);
 
         // Clear interval on component unmount
         return () => clearInterval(interval);
