@@ -121,7 +121,7 @@ const Portfolio = () => {
       showShareOptions: false,
     }))
   );
-  
+
   const [searchValue, setSearchValue] = useState("");
 
   const handleKeyUp = () => {
@@ -158,13 +158,12 @@ const Portfolio = () => {
   };
 
   const incrementCommentCount = (index) => {
-    const updatedArtists = artists.map((artist, i) =>
-      i === index
-        ? { ...artist, commentCount: artist.commentCount + 1 }
-        : artist
-    );
+    const updatedArtists = [...artists];
+    updatedArtists[index].commentCount += 1; // Increment the comment count directly
     setArtists(updatedArtists);
   };
+
+  const [commentInputValue, setCommentInputValue] = useState("");
 
   const [showShareOptions, setShowShareOptions] = useState(false); // State to control showing/hiding share options
 
@@ -172,6 +171,12 @@ const Portfolio = () => {
     const updatedArtists = [...artists];
     updatedArtists[index].showShareOptions =
       !updatedArtists[index].showShareOptions;
+    setArtists(updatedArtists);
+  };
+
+  const hideCommentInput = (index) => {
+    const updatedArtists = [...artists];
+    updatedArtists[index].showCommentInput = false;
     setArtists(updatedArtists);
   };
 
@@ -361,7 +366,16 @@ const Portfolio = () => {
                           <form
                             onSubmit={(e) => {
                               e.preventDefault();
-                              incrementCommentCount(index);
+                              const commentText = e.target[0].value.trim(); // Get the value of the textarea
+                              if (commentText !== "") {
+                                // Check if the comment is not empty
+                                incrementCommentCount(index); // Increment comment count
+                                hideCommentInput(index); // Hide comment input after posting
+                                setCommentInputValue("");
+                              } else {
+                                // Handle case where comment is empty
+                                alert("Comment cannot be empty");
+                              }
                             }}
                           >
                             <div className="mb-3">
@@ -369,6 +383,10 @@ const Portfolio = () => {
                                 className="form-control"
                                 rows="3"
                                 placeholder="Write a comment..."
+                                value={commentInputValue} // Set input value from state
+                                onChange={(e) =>
+                                  setCommentInputValue(e.target.value)
+                                } // Update state on input change
                               ></textarea>
                             </div>
                             <div
