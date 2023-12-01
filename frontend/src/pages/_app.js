@@ -12,8 +12,9 @@ export default function App({ Component, pageProps, router }) {
   const isShowcasePage = router.pathname === '/showcase';
   const isProfilePage = router.pathname === '/profile';
   const isFormPage = router.pathname === '/form';
+  const is404Page = router.pathname === '/404';
 
-  const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage || isShowcasePage || isProfilePage || isFormPage);
+  const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage || isShowcasePage || isProfilePage || isFormPage || is404Page);
 
   useEffect(() => {
     // Initialize Google Analytics
