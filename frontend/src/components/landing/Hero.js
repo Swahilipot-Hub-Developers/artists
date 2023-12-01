@@ -3,15 +3,13 @@ import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
     const images = [
-        'assets/images/projects/homepage1.jpg',
-        'assets/images/projects/homepage2.jpg',
-        'assets/images/projects/homepage3.jpg',
-        'assets/images/projects/homepage4.jpg',
-        'assets/images/projects/homepage5.jpg',
-        'assets/images/projects/homepage6.jpg',
+        'assets/images/projects/guitarist.jpg',
+        'assets/images/projects/africandesign.jpg',
+        'assets/images/projects/paintjob.jpg',
+        'assets/images/projects/african-dance.jpg',
         // Add more image paths as needed
     ];
-
+    
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const imageContainerStyle = {
