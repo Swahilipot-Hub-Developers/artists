@@ -7,7 +7,7 @@ const media = [
   { type: "image", path: "/assets/images/projects/nicky.jpeg" },
   {
     type: "video",
-    path: "https://www.youtube.com/embed/413US-VfMmM?si=epG1UhhqFaBQkmSU" title="YouTube video player",
+    path: "https://www.youtube.com/embed/413US-VfMmM?si=epG1UhhqFaBQkmSU",
   },
   { type: "image", path: "/assets/images/projects/nicky.jpeg" },
   {
