@@ -57,8 +57,11 @@ const SignUpForm = () => {
       }
     } catch (error) {
       console.error("Error during signup:", error);
-      setErrorMessage("Error during signup. Please try again.");
-      setSuccessMessage("");
+      if (error.response && error.response.status === 400) {
+        setErrorMessage("A user with that username already exists.");
+      } else {
+        setErrorMessage("Signup failed. Please try again.");
+      }
     }
   };
 

@@ -68,12 +68,19 @@ class LogoutView(APIView):
 #         return self.request.user
 
 
-class ArtistOnlyView(APIView):
+# class ArtistOnlyView(APIView):
+#     permission_classes = [IsAuthenticated, IsArtist]
+#     serializer_class = UserSerializer
+
+#     def get(self, request, format=None):
+#         return Response(data={"message": "You are an artist"}, status=status.HTTP_200_OK)
+
+class ArtistOnlyView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated, IsArtist]
     serializer_class = UserSerializer
 
-    def get(self, request, format=None):
-        return Response(data={"message": "You are an artist"}, status=status.HTTP_200_OK)
+    def get_object(self):
+        return self.request.user
 
 
 class ArtistCreateView(generics.ListCreateAPIView):
