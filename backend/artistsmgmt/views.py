@@ -60,20 +60,19 @@ class LogoutView(APIView):
         request.user.auth_token.delete()
         return Response("Successfully signed out", status=status.HTTP_200_OK)
 
-# class ArtistOnlyView(generics.RetrieveAPIView):
-#     permission_classes = [permissions.IsAuthenticated, IsArtist]
-#     serializer_class = UserSerializer
-
-#     def get_object(self):
-#         return self.request.user
-
 
 class ArtistOnlyView(APIView):
     permission_classes = [IsAuthenticated, IsArtist]
-    serializer_class = UserSerializer
 
     def get(self, request, format=None):
-        return Response(data={"message": "You are an artist"}, status=status.HTTP_200_OK)
+        # Retrieve the authenticated artist
+        artist = Artist.objects.get(user=request.user)
+
+        # Serialize all fields and their values for the artist
+        serializer = ArtistSerializer(artist)
+
+        # Return serialized data
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ArtistCreateView(generics.ListCreateAPIView):

@@ -57,8 +57,11 @@ const SignUpForm = () => {
       }
     } catch (error) {
       console.error("Error during signup:", error);
-      setErrorMessage("Error during signup. Please try again.");
-      setSuccessMessage("");
+      if (error.response && error.response.status === 400) {
+        setErrorMessage("A user with that username already exists.");
+      } else {
+        setErrorMessage("Signup failed. Please try again.");
+      }
     }
   };
 
@@ -206,7 +209,7 @@ const SignUpForm = () => {
 
                         <div className="d-flex align-items-center justify-content-center pb-4">
                           <p className="mb-0 me-2">Already have an account?</p>
-                          <a href="/signup" className="btn btn-outline-danger">
+                          <a href="/login" className="btn btn-outline-danger">
                             Log In
                           </a>
                         </div>

@@ -49,8 +49,7 @@ const HomePage = () => {
     <div>
       {userData ? (
         <div>
-          <h1>{userData.message}!</h1>
-          {/* Display user-specific content */}
+          <h1>Welcome, {userData.artist_name}!</h1>
         </div>
       ) : (
         <p>Loading...</p>
