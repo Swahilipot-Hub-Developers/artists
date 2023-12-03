@@ -2,6 +2,7 @@ import Head from "next/head";
 import axios from "axios";
 import { useState } from "react";
 import Router from "next/router";
+import { setCookie } from "nookies";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -26,11 +27,22 @@ const LoginForm = () => {
       if (response.status === 200) {
         // Successful login handling
         setErrorMessage("");
-        // Redirect to a dashboard or profile page after successful login
-        Router.push("/profile"); // Change '/dashboard' to your desired route
+        const { token } = response.data;
+
+        // Set the received token as a cookie
+        setCookie(null, "token", token, {
+          maxAge: 30 * 24 * 60 * 60, // Expiry in seconds (e.g., 30 days)
+          path: "/",
+          secure: true,
+          sameSite: "strict",
+        });
+
+        setErrorMessage("");
+        Router.push("/homepage");
       } else {
         // Handle other possible responses (e.g., invalid credentials)
         setErrorMessage("Invalid credentials. Please try again.");
+        Router.push("/login");
       }
     } catch (error) {
       console.error("Error during login:", error);
