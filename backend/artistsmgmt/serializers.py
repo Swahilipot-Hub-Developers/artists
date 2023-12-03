@@ -42,10 +42,14 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
 
 
 class ArtistSerializer(serializers.ModelSerializer):
+    artist_name = serializers.SerializerMethodField()
     class Meta:
         model = Artist
         fields = '__all__'
         extra_kwargs = {'user': {'read_only': True}}
+        
+    def get_artist_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}"
 
 
 # Portfolio
