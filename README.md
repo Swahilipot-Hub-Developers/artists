@@ -64,9 +64,11 @@ Welcome to the Artists Management project repository! This project aims to creat
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Alt text](./frontend/public/img/homepage.JPG)
+*Homepage*![Homepage](./frontend/public/img/homepage.png)
 
-![Alt text](./frontend/public/img/portfolio.png)
+
+*Portfolio*![Portfolio](./frontend/public/img/portfolio.png)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -11,9 +11,9 @@ urlpatterns = [
 
     # Artist
     path('artist/dashboard', ArtistOnlyView.as_view(), name='artist_dashboard'),
-    path('artist/', ArtistCreateView.as_view(), name='artist-create'),
-    path('artist/update/', ArtistUpdateView.as_view(), name='artist-update'),
-    path('artists/<int:pk>/', ArtistRetrieveUpdateDestroyView.as_view(),
+    path('profiles/', ArtistCreateView.as_view(), name='artist-create'),
+    path('profile/update/', ArtistUpdateView.as_view(), name='artist-update'),
+    path('profile/<int:pk>/', ArtistRetrieveUpdateDestroyView.as_view(),
          name='artist-retrieve-update-destroy'),
 
     # Portfolio

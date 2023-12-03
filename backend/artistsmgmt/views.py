@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Artist, User, Portfolio, FeaturedArtists, UpcomingEvents
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from datetime import datetime, timedelta
 
 
 class ArtistSignUpView(generics.CreateAPIView):
@@ -35,12 +36,22 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        return Response({
 
+        # Calculate the token expiry time (e.g., 30 days from now)
+        expiry_time = datetime.now() + timedelta(days=30)
+
+        # Create a response
+        response = Response({
             'token': token.key,
             'user_id': user.pk,
             'email': user.email
         })
+
+        # Set the token cookie as HTTP-only with an expiration time
+        response.set_cookie('token', token.key,
+                            httponly=True, expires=expiry_time)
+
+        return response
 
 
 class LogoutView(APIView):
