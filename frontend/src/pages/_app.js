@@ -7,14 +7,14 @@ import '../styles/scss/theme.scss';
 import Layout from '@/layout/Layout';
 
 export default function App({ Component, pageProps, router }) {
-  const isLoginPage = router.pathname === '/login';
-  const isSignupPage = router.pathname === '/signup';
-  const isShowcasePage = router.pathname === '/showcase';
-  const isProfilePage = router.pathname === '/profile';
-  const isFormPage = router.pathname === '/form';
-  const is404Page = router.pathname === '/404';
+  // const isLoginPage = router.pathname === '/login';
+  // const isSignupPage = router.pathname === '/signup';
+  // const isShowcasePage = router.pathname === '/showcase';
+  // const isProfilePage = router.pathname === '/profile';
+  // const isFormPage = router.pathname === '/form';
+  // const is404Page = router.pathname === '/404';
 
-  const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage || isShowcasePage || isProfilePage || isFormPage || is404Page);
+  // const shouldIncludeNavbarAndFooter = !(isLoginPage || isSignupPage || isShowcasePage || isProfilePage || isFormPage || is404Page);
 
   useEffect(() => {
     // Initialize Google Analytics
@@ -28,8 +28,6 @@ export default function App({ Component, pageProps, router }) {
   }, [router.pathname]); // Track page views on route changes
 
   return (
-    <Layout includeNavbar={shouldIncludeNavbarAndFooter} includeFooter={shouldIncludeNavbarAndFooter}>
       <Component {...pageProps} />
-    </Layout>
   );
 }

@@ -62,7 +62,7 @@ class LogoutView(APIView):
 
 
 class ArtistOnlyView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsArtist]
 
     def get(self, request, format=None):
         # Retrieve the authenticated artist
