@@ -20,7 +20,7 @@ const ContactForm = () => {
   // style={bodyStyle}
 
   return (
-    <main className='bg-body-tertiary'>
+    <main className='bg-body-tertiary' id='contact'>
       <div className="page-header d-flex align-items-center">
         <div className="container position-relative">
           <div className="row d-flex justify-content-center">

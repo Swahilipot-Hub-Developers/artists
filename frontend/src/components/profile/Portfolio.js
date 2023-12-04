@@ -39,7 +39,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-body-tertiary">
+    <div className="bg-body-tertiary" id="portfolio">
       <h5 className="display-4 text-primary m-5 text-center">Portfolio</h5>
       <p
         className="text-center mt-4 mb-5"
