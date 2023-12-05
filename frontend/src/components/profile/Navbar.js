@@ -11,7 +11,7 @@ const Customnavbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light" id="header">
       <div className="container">
         <a className="navbar-brand" href="#">
           Artist Profile

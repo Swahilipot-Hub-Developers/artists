@@ -2,14 +2,14 @@
 from rest_framework import generics, status, permissions
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, ArtistSignUpSerializer, ArtistSerializer, PortfolioSerializer, FeaturedArtistSerializer, UpcomingEventsSerializer
+from .serializers import UserSerializer, ArtistSignUpSerializer, ArtistSerializer, PortfolioSerializer, FeaturedArtistSerializer, UpcomingEventsSerializer, ArtistBioSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from .permissions import IsArtist
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Artist, User, Portfolio, FeaturedArtists, UpcomingEvents
+from .models import Artist, User, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from datetime import datetime, timedelta
 
@@ -168,3 +168,29 @@ class FeaturedArtistsDetailView(generics.RetrieveUpdateDestroyAPIView):
 class UpcomingEventsListAPIView(generics.ListAPIView):
     queryset = UpcomingEvents.objects.all()
     serializer_class = UpcomingEventsSerializer
+
+
+# ArtistBio
+
+class ArtistBioListCreateAPIView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated, IsArtist]
+    queryset = ArtistBio.objects.all()
+    serializer_class = ArtistBioSerializer
+
+
+class ArtistBioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    # queryset = ArtistBio.objects.all()
+    serializer_class = ArtistBioSerializer
+
+    def get_object(self):
+        # Get the authenticated user from the request
+        user = self.request.user
+
+        # Retrieve the associated ArtistBio for the authenticated user
+        artist_bio = ArtistBio.objects.get(artist__user=user)
+        return artist_bio
+
+    def get_queryset(self):
+        # Override the queryset to return an empty queryset
+        # This prevents other ArtistBio instances from being accessed
+        return ArtistBio.objects.none()

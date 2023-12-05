@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from artistsmgmt.models import User, Artist, Portfolio, FeaturedArtists, UpcomingEvents
+from artistsmgmt.models import User, Artist, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
+from django.shortcuts import get_object_or_404
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -61,8 +62,31 @@ class PortfolioSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'artist': {'read_only': True}}
 
-# Featured Artist
 
+# ArtistBio
+
+class ArtistBioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArtistBio
+        fields = '__all__'
+        extra_kwargs = {
+            'artist': {'read_only': True},
+        }
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        user = request.user if request else None
+
+        # Fetch the associated Artist instance for the authenticated user
+        artist_instance = get_object_or_404(Artist, user=user)
+
+        # Create the ArtistBio instance associating it with the corresponding Artist
+        artist_bio = ArtistBio.objects.create(
+            artist=artist_instance, **validated_data)
+        return artist_bio
+
+
+# Featured Artist
 
 class FeaturedArtistSerializer(serializers.ModelSerializer):
     selected_artist_name = serializers.SerializerMethodField()

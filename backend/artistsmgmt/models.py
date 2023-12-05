@@ -23,10 +23,21 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 @receiver(post_save, sender=User)
 def create_user_artist(sender, instance, created, **kwargs):
     if created:
-        Artist.objects.create(user=instance, type='default',
-                              description='default', skills='default')
+        # Create Artist instance for the User
+        artist_instance = Artist.objects.create(user=instance, type='default',
+                                                description='default', skills='default')
+
+        # Create corresponding ArtistBio instance for the Artist using the created Artist instance
+        ArtistBio.objects.create(
+            artist=artist_instance,
+            profession='default_profession',
+            expert_level='default_level',
+            location='default_location',
+            description='default_description'
+        )
 
 
+# Artist Profile
 class Artist(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="artist")
@@ -38,6 +49,24 @@ class Artist(models.Model):
     def __str__(self):
         return f"{self.user.username}'s profile"
 
+
+# ArtistBio
+
+class ArtistBio(models.Model):
+    artist = models.OneToOneField(
+        Artist, on_delete=models.CASCADE)
+    profession = models.CharField(max_length=100)
+    expert_level = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    photo = models.ImageField(
+        upload_to='bio_photos/', null=True, blank=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.artist.user.username}'s Bio"
+
+
+# Portfolio
 
 class Portfolio(models.Model):
     artist = models.ForeignKey('artistsmgmt.Artist', on_delete=models.CASCADE)
@@ -55,7 +84,7 @@ class FeaturedArtists(models.Model):
     profession = models.CharField(max_length=100, null=True, blank=True)
     photo = models.ImageField(
         upload_to='featured_photos/', null=True, blank=True)
-    
+
     def __str__(self):
         return f"{self.selected_artist.artist.user.username}"
 
@@ -65,11 +94,12 @@ def update_featured_artist_fields(sender, instance, created, **kwargs):
     if created and instance.selected_artist:
         # Fetch the associated Portfolio instance
         portfolio_of_selected_artist = instance.selected_artist
-        
+
         # Update FeaturedArtists fields with Portfolio data
         instance.profession = portfolio_of_selected_artist.profession
-        instance.photo = portfolio_of_selected_artist.photo  # Assuming photo is an ImageField in Portfolio
-        
+        # Assuming photo is an ImageField in Portfolio
+        instance.photo = portfolio_of_selected_artist.photo
+
         # Save the updated FeaturedArtists instance
         instance.save()
 

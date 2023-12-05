@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import ArtistSignUpView, CustomAuthToken, LogoutView, ArtistOnlyView, ArtistCreateView, ArtistRetrieveUpdateDestroyView, ArtistUpdateView
 from .views import PortfolioListCreateAPIView, PortfolioDetailAPIView, FeaturedArtistsListCreateView, FeaturedArtistsDetailView, UpcomingEventsListAPIView
+from .views import ArtistBioListCreateAPIView, ArtistBioDetailAPIView
 
 urlpatterns = [
 
@@ -30,5 +31,9 @@ urlpatterns = [
 
     # Upcoming Events
     path('events/', UpcomingEventsListAPIView.as_view(), name='events-list'),
+    
+    # ArtistBio
+     path('artist/', ArtistBioListCreateAPIView.as_view(), name='artist-bio-list-create'),
+     path('artist-bio/', ArtistBioDetailAPIView.as_view(), name='artist-bio-detail'),
 
 ]
