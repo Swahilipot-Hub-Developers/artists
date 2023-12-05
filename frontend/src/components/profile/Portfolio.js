@@ -39,15 +39,32 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-body-tertiary">
+    <div className="bg-body-tertiary" id="portfolio">
       <h5 className="display-4 text-primary m-5 text-center">Portfolio</h5>
-
-      {/* Add a div to contain the buttons */}
+      <p
+        className="text-center mt-4 mb-5"
+        style={{ fontSize: "1.25rem", lineHeight: "1.6" }}
+      >
+        Welcome to my portfolio showcasing a collection of my recent projects. <br />
+        Feel free to explore and filter between different categories to view my
+        current and previous works.
+      </p>
       <div className="container text-center mb-4">
-        <button className="btn btn-primary btn-lg mx-2">Current Works</button>
-        <button className="btn btn-secondary btn-lg mx-2">
-          Previous Works
-        </button>
+        <div
+          className="btn-group btn-group-lg"
+          role="group"
+          aria-label="Responsive Buttons"
+        >
+          <button type="button" className="btn btn-primary mx-2">
+            All
+          </button>
+          <button type="button" className="btn btn-info mx-2">
+            Current Works
+          </button>
+          <button type="button" className="btn btn-secondary mx-2">
+            Previous Works
+          </button>
+        </div>
       </div>
 
       <div className="album py-5">

@@ -23,7 +23,7 @@ const Skills = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" id="skills">
       <h6 className="display-4 text-primary m-5 text-center">
         Skills and Talents
       </h6>

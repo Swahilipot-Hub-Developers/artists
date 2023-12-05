@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from artistsmgmt.models import User, Artist, Portfolio, FeaturedArtists, UpcomingEvents
+from artistsmgmt.models import Artist, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
+from django.shortcuts import get_object_or_404
 
 
-class UserSerializer(serializers.ModelSerializer):
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Artist
         fields = ['id', 'username', 'email']
 
 
@@ -13,12 +14,12 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
         style={'input_type': 'password'}, write_only=True)
 
     class Meta:
-        model = User
+        model = Artist
         fields = ['id', 'username', 'email', 'password', 'password2']
         extra_kwargs = {'password': {'write_only': True}}
 
     def save(self, **kwargs):
-        user = User(
+        user = Artist(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
         )
@@ -33,7 +34,7 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
         return user
 
     def create(self, validated_data):
-        user = User.objects.create_user(
+        user = Artist.objects.create_user(
             validated_data['username'],
             validated_data['email'],
             validated_data['password']
@@ -41,16 +42,16 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
         return user
 
 
-class ArtistSerializer(serializers.ModelSerializer):
-    artist_name = serializers.SerializerMethodField()
+# class ArtistSerializer(serializers.ModelSerializer):
+#     artist_name = serializers.SerializerMethodField()
 
-    class Meta:
-        model = Artist
-        fields = '__all__'
-        extra_kwargs = {'user': {'read_only': True}}
+#     class Meta:
+#         model = Artist
+#         fields = '__all__'
+#         extra_kwargs = {'user': {'read_only': True}}
 
-    def get_artist_name(self, obj):
-        return obj.user.username if obj.user.username else ""
+#     def get_artist_name(self, obj):
+#         return obj.user.username if obj.user.username else ""
 
 # Portfolio
 
@@ -61,8 +62,31 @@ class PortfolioSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'artist': {'read_only': True}}
 
-# Featured Artist
 
+# ArtistBio
+
+class ArtistBioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArtistBio
+        fields = '__all__'
+        extra_kwargs = {
+            'artist': {'read_only': True},
+        }
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        user = request.user if request else None
+
+        # Fetch the associated Artist instance for the authenticated user
+        artist_instance = get_object_or_404(Artist, user=user)
+
+        # Create the ArtistBio instance associating it with the corresponding Artist
+        artist_bio = ArtistBio.objects.create(
+            artist=artist_instance, **validated_data)
+        return artist_bio
+
+
+# Featured Artist
 
 class FeaturedArtistSerializer(serializers.ModelSerializer):
     selected_artist_name = serializers.SerializerMethodField()
@@ -72,7 +96,7 @@ class FeaturedArtistSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_selected_artist_name(self, obj):
-        return f"{obj.selected_artist.artist.user.first_name} {obj.selected_artist.artist.user.last_name}"
+        return f"{obj.selected_artist.artist.first_name} {obj.selected_artist.artist.last_name}"
 
 
 # Upcoming Events

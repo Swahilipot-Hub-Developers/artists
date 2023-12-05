@@ -7,9 +7,9 @@ const Hero = () => {
                 <div className='row justify-content-center'>
                     <div className='col-lg-6 text-center'>
                         <br />
-                        <h2>I'm <span>Jenny Wilson</span> a Professional Photographer from New York City</h2>
+                        <h2>Hello 👋, I'm <span>Jenny Wilson</span> a Professional Photographer from New York City</h2>
                         <p>Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.</p>
-                        <Link href="contact.html" className="btn btn-primary btn-lg mx-2">Available for hire</Link>
+                        <Link href="/contact" className="btn btn-primary btn-lg mx-2">Available for hire</Link><br /><br />
                     </div>
 
                     {/* Right Column with Artist Picture */}

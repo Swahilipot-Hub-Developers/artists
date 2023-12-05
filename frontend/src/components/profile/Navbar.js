@@ -11,7 +11,7 @@ const Customnavbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light" id="header">
       <div className="container">
         <a className="navbar-brand" href="#">
           Artist Profile
@@ -46,7 +46,7 @@ const Customnavbar = () => {
                 className={`nav-link ${
                   activeLink === "Artists" ? "active" : ""
                 }`}
-                href="#"
+                href="#hero"
                 onClick={() => setActiveLink("Artists")}
               >
                 About
@@ -55,7 +55,7 @@ const Customnavbar = () => {
             <li className="nav-item">
               <a
                 className={`nav-link ${activeLink === "About" ? "active" : ""}`}
-                href="#"
+                href="#portfolio"
                 onClick={() => setActiveLink("About")}
               >
                 Portfolio
@@ -66,7 +66,7 @@ const Customnavbar = () => {
                 className={`nav-link ${
                   activeLink === "SKills & Talents" ? "active" : ""
                 }`}
-                href="#"
+                href="#skills"
                 onClick={() => setActiveLink("Skills & Talents")}
               >
                 Skills & Talents
@@ -77,7 +77,7 @@ const Customnavbar = () => {
                 className={`nav-link ${
                   activeLink === "Contact" ? "active" : ""
                 }`}
-                href="#"
+                href="#contact"
                 onClick={() => setActiveLink("Contact")}
               >
                 Contact

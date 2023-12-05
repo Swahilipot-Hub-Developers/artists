@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import ArtistSignUpView, CustomAuthToken, LogoutView, ArtistOnlyView, ArtistCreateView, ArtistRetrieveUpdateDestroyView, ArtistUpdateView
 from .views import PortfolioListCreateAPIView, PortfolioDetailAPIView, FeaturedArtistsListCreateView, FeaturedArtistsDetailView, UpcomingEventsListAPIView
+from .views import ArtistBioListCreateAPIView, ArtistBioDetailAPIView
 
 urlpatterns = [
 
@@ -11,9 +12,9 @@ urlpatterns = [
 
     # Artist
     path('artist/dashboard', ArtistOnlyView.as_view(), name='artist_dashboard'),
-    path('profiles/', ArtistCreateView.as_view(), name='artist-create'),
-    path('profile/update/', ArtistUpdateView.as_view(), name='artist-update'),
-    path('profile/<int:pk>/', ArtistRetrieveUpdateDestroyView.as_view(),
+    path('artists/', ArtistCreateView.as_view(), name='artist-create'),
+    path('artist/update/', ArtistUpdateView.as_view(), name='artist-update'),
+    path('artist/<int:pk>/', ArtistRetrieveUpdateDestroyView.as_view(),
          name='artist-retrieve-update-destroy'),
 
     # Portfolio
@@ -30,5 +31,9 @@ urlpatterns = [
 
     # Upcoming Events
     path('events/', UpcomingEventsListAPIView.as_view(), name='events-list'),
+    
+    # ArtistBio
+     path('artist/', ArtistBioListCreateAPIView.as_view(), name='artist-bio-list-create'),
+     path('artist-bio/', ArtistBioDetailAPIView.as_view(), name='artist-bio-detail'),
 
 ]
