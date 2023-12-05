@@ -142,7 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ACCOUNT_UNIQUE_EMAIL = True
 
-AUTH_USER_MODEL = 'artistsmgmt.User'
+AUTH_USER_MODEL = 'artistsmgmt.Artist'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'

@@ -2,14 +2,14 @@
 from rest_framework import generics, status, permissions
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, ArtistSignUpSerializer, ArtistSerializer, PortfolioSerializer, FeaturedArtistSerializer, UpcomingEventsSerializer, ArtistBioSerializer
+from .serializers import ArtistSignUpSerializer, ArtistSerializer, PortfolioSerializer, FeaturedArtistSerializer, UpcomingEventsSerializer, ArtistBioSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from .permissions import IsArtist
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Artist, User, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
+from .models import Artist, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from datetime import datetime, timedelta
 
@@ -22,7 +22,7 @@ class ArtistSignUpView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "user": ArtistSerializer(user, context=self.get_serializer_context()).data,
             # Token.objects.get(user=user).key is the token generated for the user
             "token": Token.objects.get(user=user).key,
             "message": "Artist successfully created",
@@ -62,11 +62,14 @@ class LogoutView(APIView):
 
 
 class ArtistOnlyView(APIView):
-    permission_classes = [IsAuthenticated, IsArtist]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         # Retrieve the authenticated artist
-        artist = Artist.objects.get(user=request.user)
+        try:
+            artist = Artist.objects.get(username=request.user.username)
+        except Artist.DoesNotExist:
+            return Response({"error": "Artist not found"}, status=status.HTTP_404_NOT_FOUND)
 
         # Serialize all fields and their values for the artist
         serializer = ArtistSerializer(artist)
@@ -130,7 +133,7 @@ class PortfolioDetailAPIView(APIView):
         serializer = PortfolioSerializer(portfolio)
         return Response(serializer.data)
 
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
 
     def put(self, request, pk):
         portfolio = self.get_object(pk)
@@ -160,7 +163,7 @@ class FeaturedArtistsListCreateView(generics.ListCreateAPIView):
 class FeaturedArtistsDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = FeaturedArtists.objects.all()
     serializer_class = FeaturedArtistSerializer
-    permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAdminUser]
 
 
 # Upcoming Events
@@ -173,24 +176,22 @@ class UpcomingEventsListAPIView(generics.ListAPIView):
 # ArtistBio
 
 class ArtistBioListCreateAPIView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsArtist]
+    permission_classes = [IsAuthenticated]
     queryset = ArtistBio.objects.all()
     serializer_class = ArtistBioSerializer
 
 
 class ArtistBioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    # queryset = ArtistBio.objects.all()
     serializer_class = ArtistBioSerializer
 
     def get_object(self):
         # Get the authenticated user from the request
         user = self.request.user
 
-        # Retrieve the associated ArtistBio for the authenticated user
-        artist_bio = ArtistBio.objects.get(artist__user=user)
-        return artist_bio
-
-    def get_queryset(self):
-        # Override the queryset to return an empty queryset
-        # This prevents other ArtistBio instances from being accessed
-        return ArtistBio.objects.none()
+        try:
+            # Retrieve the associated ArtistBio for the authenticated user
+            artist_bio = ArtistBio.objects.get(artist=user.id)
+            return artist_bio
+        except ArtistBio.DoesNotExist:
+            # If the ArtistBio doesn't exist, return an empty queryset
+            return ArtistBio.objects.none()

@@ -49,7 +49,7 @@ const HomePage = () => {
     <div>
       {userData ? (
         <div>
-          <h1>Welcome, {userData.artist_name}!</h1>
+          <h1>Welcome, {userData.username}!</h1>
         </div>
       ) : (
         <p>Loading...</p>
