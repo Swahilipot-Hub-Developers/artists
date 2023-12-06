@@ -154,3 +154,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 ROOT_URLCONF = 'backend.urls'
+
+# Twilio Credentials
+
+TWILIO_ACCOUNT_SID = 'ACba94830939f2f100dbca68d347cb3890'
+TWILIO_AUTH_TOKEN = 'bf2d887d6833cad99efd40e91193dc80'
+TWILIO_PHONE_NUMBER = '+18475586810'

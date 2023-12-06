@@ -14,6 +14,9 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermiss
 from datetime import datetime, timedelta
 from django.http import Http404
 
+from .utils import send_message
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 class ArtistSignUpView(generics.CreateAPIView):
     serializer_class = ArtistSignUpSerializer
@@ -196,3 +199,33 @@ class ArtistBioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         except ArtistBio.DoesNotExist:
             # Raise 404 if the ArtistBio doesn't exist for this user
             raise Http404("ArtistBio does not exist for this user")
+        
+        
+# TWilio SMS API
+
+@csrf_exempt
+def send_sms(request):
+    if request.method == 'POST':
+        body = request.POST.get('body')
+        to = request.POST.get('to')
+        
+        # Send message using the send_message function from utils
+        message_sid = send_message(to, body)
+        
+        return JsonResponse({'message': message_sid}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+
+# def send_sms(request):
+#     if request.method == 'POST':
+#         body = request.POST.get('body')
+#         to = request.POST.get('to')
+        
+#         # Send message using the send_message function from utils
+#         message_sid = send_message(to, body)
+        
+#         return JsonResponse({'message': message_sid}, status=200)
+#     else:
+#         return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
