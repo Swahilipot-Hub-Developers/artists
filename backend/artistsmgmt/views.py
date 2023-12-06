@@ -227,9 +227,9 @@ def send_sms(request):
 class SendEmailView(APIView):
     def post(self, request, *args, **kwargs):
         try:
-            sender_email = request.POST.get('email')
-            subject = request.POST.get('subject')
-            message = request.POST.get('message')
+            sender_email = request.data.get('email')
+            subject = request.data.get('subject')
+            message = request.data.get('message')
             recipient_email = 'warrenshiv@gmail.com'
 
             if sender_email is None or subject is None or message is None:
