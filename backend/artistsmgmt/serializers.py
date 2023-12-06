@@ -66,12 +66,16 @@ class PortfolioSerializer(serializers.ModelSerializer):
 # ArtistBio
 
 class ArtistBioSerializer(serializers.ModelSerializer):
+    artist_name = serializers.SerializerMethodField()
     class Meta:
         model = ArtistBio
         fields = '__all__'
         extra_kwargs = {
             'artist': {'read_only': True},
         }
+        
+    def get_artist_name(self, obj):
+        return f"{obj.artist.first_name} {obj.artist.last_name}"
 
     def create(self, validated_data):
         request = self.context.get('request')

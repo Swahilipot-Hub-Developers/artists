@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { parseCookies } from "nookies"; // Import parseCookies from nookies
+import { parseCookies } from "nookies";
 import Router from "next/router";
 
 const fetchUserData = async (token) => {
@@ -26,22 +26,19 @@ const HomePage = () => {
     const cookies = parseCookies();
     const token = cookies.token || ""; // Access the 'token' cookie
 
-    // console.log('Token from cookie:', token);
-
     // Fetch user data when the component mounts
     if (token) {
       fetchUserData(token)
         .then((data) => {
-          setUserData(data); // Set user data in state
+          setUserData(data);
         })
         .catch((error) => {
           console.error(error);
-          // Handle error (e.g., redirect to login page)
         });
     } else {
       // If token is not available, redirect to login page
-      Router.push("/login"); // Replace with your login page route
-      return; // Stop further execution
+      Router.push("/login");
+      return;
     }
   }, []);
 

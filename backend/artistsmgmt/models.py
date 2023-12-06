@@ -43,7 +43,7 @@ class ArtistBio(models.Model):
     photo = models.ImageField(
         upload_to='bio_photos/', null=True, blank=True)
     description = models.TextField()
-    
+
     class Meta:
         verbose_name = 'Artist Bio'
         verbose_name_plural = 'Artist Bio'
@@ -53,13 +53,21 @@ class ArtistBio(models.Model):
 
 
 # Portfolio
-
 class Portfolio(models.Model):
     artist = models.ForeignKey('artistsmgmt.Artist', on_delete=models.CASCADE)
-    profession = models.CharField(max_length=100)
+
+    CATEGORY_CHOICES = [
+        ('current', 'Current Works'),
+        ('previous', 'Previous Works'),
+    ]
+
     photo = models.ImageField(
         upload_to='portfolio/', null=True, blank=True)
-    
+    video = models.FileField(
+        upload_to='portfolio/', null=True, blank=True)
+    category = models.CharField(
+        max_length=100, choices=CATEGORY_CHOICES, default='current')
+
     class Meta:
         verbose_name = 'Portfolio'
         verbose_name_plural = 'Portfolio'
@@ -74,7 +82,7 @@ class FeaturedArtists(models.Model):
     profession = models.CharField(max_length=100, null=True, blank=True)
     photo = models.ImageField(
         upload_to='featured_photos/', null=True, blank=True)
-    
+
     class Meta:
         verbose_name = 'Featured Artist'
         verbose_name_plural = 'Featured Artists'
@@ -105,11 +113,23 @@ class UpcomingEvents(models.Model):
     location = models.CharField(max_length=100)
     time = models.DateTimeField()
     description = models.TextField()
-    
+
     class Meta:
         verbose_name = 'Upcoming Event'
         verbose_name_plural = 'Upcoming Events'
-        
 
     def __str__(self):
         return self.title
+
+
+# # ContactMessage
+
+# class ContactMessage(models.Model):
+#     name = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     subject = models.CharField(max_length=200)
+#     message = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.subject

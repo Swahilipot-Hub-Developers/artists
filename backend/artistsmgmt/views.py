@@ -10,8 +10,9 @@ from .permissions import IsArtist
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Artist, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
 from datetime import datetime, timedelta
+from django.http import Http404
 
 
 class ArtistSignUpView(generics.CreateAPIView):
@@ -193,5 +194,5 @@ class ArtistBioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
             artist_bio = ArtistBio.objects.get(artist=user.id)
             return artist_bio
         except ArtistBio.DoesNotExist:
-            # If the ArtistBio doesn't exist, return an empty queryset
-            return ArtistBio.objects.none()
+            # Raise 404 if the ArtistBio doesn't exist for this user
+            raise Http404("ArtistBio does not exist for this user")
