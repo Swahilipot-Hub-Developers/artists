@@ -10,8 +10,16 @@ from .permissions import IsArtist
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Artist, Portfolio, FeaturedArtists, UpcomingEvents, ArtistBio
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
 from datetime import datetime, timedelta
+from django.http import Http404
+
+from .utils import send_message
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from django.core.mail import send_mail
+from django.utils.decorators import method_decorator
 
 
 class ArtistSignUpView(generics.CreateAPIView):
@@ -193,5 +201,44 @@ class ArtistBioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
             artist_bio = ArtistBio.objects.get(artist=user.id)
             return artist_bio
         except ArtistBio.DoesNotExist:
-            # If the ArtistBio doesn't exist, return an empty queryset
-            return ArtistBio.objects.none()
+            # Raise 404 if the ArtistBio doesn't exist for this user
+            raise Http404("ArtistBio does not exist for this user")
+
+
+# TWilio SMS API
+
+@csrf_exempt
+def send_sms(request):
+    if request.method == 'POST':
+        body = request.POST.get('body')
+        to = request.POST.get('to')
+
+        # Send message using the send_message function from utils
+        message_sid = send_message(to, body)
+
+        return JsonResponse({'message': message_sid}, status=200)
+    else:
+        return JsonResponse({'error': 'Invalid request'}, status=400)
+
+# Email API
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SendEmailView(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            sender_email = request.POST.get('email')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+            recipient_email = 'warrenshiv@gmail.com'
+
+            if sender_email is None or subject is None or message is None:
+                return JsonResponse({'error': 'Please provide all fields'}, status=400)
+
+            # Send email using the send_mail function from Django
+            send_mail(subject, message, sender_email, [
+                      recipient_email], fail_silently=False)
+
+            return JsonResponse({'success': True, 'message': 'Email sent successfully'}, status=200)
+        except Exception as e:
+            return JsonResponse({'succes': False, 'error': str(e)}, status=400)
