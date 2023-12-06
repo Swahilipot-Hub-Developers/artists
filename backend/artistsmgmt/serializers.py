@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'first_name',
+                  'last_name', 'profession', 'photo']
 
 
 class ArtistSignUpSerializer(serializers.ModelSerializer):
@@ -40,21 +41,6 @@ class ArtistSignUpSerializer(serializers.ModelSerializer):
             validated_data['password']
         )
         return user
-
-
-# class ArtistSerializer(serializers.ModelSerializer):
-#     artist_name = serializers.SerializerMethodField()
-
-#     class Meta:
-#         model = Artist
-#         fields = '__all__'
-#         extra_kwargs = {'user': {'read_only': True}}
-
-#     def get_artist_name(self, obj):
-#         return obj.user.username if obj.user.username else ""
-
-# Portfolio
-
 
 class PortfolioSerializer(serializers.ModelSerializer):
     class Meta:
