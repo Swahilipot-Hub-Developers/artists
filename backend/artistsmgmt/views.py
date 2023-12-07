@@ -205,7 +205,24 @@ class ArtistBioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
             raise Http404("ArtistBio does not exist for this user")
 
 
+class PublicArtistBioDetailView(generics.RetrieveAPIView):
+    serializer_class = ArtistBioSerializer
+
+    def get_object(self):
+        username = self.kwargs.get('username')
+        if not username:
+            # Fetch from query parameters if needed
+            username = self.request.query_params.get('username')
+
+        try:
+            artist_bio = ArtistBio.objects.get(artist__username=username)
+            return artist_bio
+        except ArtistBio.DoesNotExist:
+            raise Http404("ArtistBio does not exist for this user")
+
+
 # TWilio SMS API
+
 
 @csrf_exempt
 def send_sms(request):
