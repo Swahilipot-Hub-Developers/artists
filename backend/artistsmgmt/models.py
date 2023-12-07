@@ -8,9 +8,20 @@ from rest_framework.authtoken.models import Token
 
 class Artist(AbstractUser):
     # Any additional fields or methods for the User model
+
+    CATEGORY_CHOICES = [
+        ('', 'Select Category'),
+        ('visual artists', 'Visual Artists'),
+        ('performing artists', 'Performing Artists'),
+        ('literary artists', 'Literary Artists'),
+        ('fashion artists', 'Fashion Artists'),
+    ]
+    
     profession = models.CharField(max_length=100, null=True, blank=True)
     photo = models.ImageField(
         upload_to='profile_photos/', null=True, blank=True)
+    category = models.CharField(
+        max_length=100, choices=CATEGORY_CHOICES, default='')
     pass
 
     class Meta:
