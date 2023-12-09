@@ -16,7 +16,7 @@ class Artist(AbstractUser):
         ('literary artists', 'Literary Artists'),
         ('fashion artists', 'Fashion Artists'),
     ]
-    
+
     profession = models.CharField(max_length=100, null=True, blank=True)
     photo = models.ImageField(
         upload_to='profile_photos/', null=True, blank=True)
