@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
-import Layout from "@/ui-components/layout";
 
 const Hero = () => {
   const [artist, setArtist] = useState([]);
@@ -25,54 +24,51 @@ const Hero = () => {
     fetchArtist();
   }, []);
   return (
-    <Layout>
-      <section id="hero">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 text-center">
+    <section id="hero">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-6 text-center">
+            <br />
+            <h2>
+              Hello 👋, I'm <span>{artist.artist_name}</span> a{" "}
+              {artist.expert_level}
               <br />
-              <h2>
-                Hello 👋, I'm <span>{artist.artist_name}</span> a{" "}
-                {artist.expert_level}
-                <br />
-                {artist.profession} from {artist.location}
-              </h2>
-              <p>
-                Blanditiis praesentium aliquam illum tempore incidunt debitis
-                dolorem magni est deserunt sed qui libero. Qui voluptas
-                amet.Blanditiis praesentium aliquam illum tempore incidunt
-                debitis dolorem magni est deserunt sed qui libero. Qui voluptas
-                amet.Blanditiis praesentium aliquam illum tempore incidunt
-                debitis dolorem magni est deserunt sed qui libero. Qui voluptas
-                amet.
-              </p>
-              <Link href="/contact" className="btn btn-primary btn-lg mx-2">
-                Available for hire
-              </Link>
-              <br />
-              <br />
-              <Link href="/contact" className="btn btn-primary btn-lg mx-2">
-                Edit
-              </Link>
-            </div>
+              {artist.profession} from {artist.location}
+            </h2>
+            <p>
+              Blanditiis praesentium aliquam illum tempore incidunt debitis
+              dolorem magni est deserunt sed qui libero. Qui voluptas
+              amet.Blanditiis praesentium aliquam illum tempore incidunt debitis
+              dolorem magni est deserunt sed qui libero. Qui voluptas
+              amet.Blanditiis praesentium aliquam illum tempore incidunt debitis
+              dolorem magni est deserunt sed qui libero. Qui voluptas amet.
+            </p>
+            <Link href="/contact" className="btn btn-primary btn-lg mx-2">
+              Available for hire
+            </Link>
+            <br />
+            <br />
+            <Link href="/contact" className="btn btn-primary btn-lg mx-2">
+              Edit
+            </Link>
+          </div>
 
-            {/* Right Column with Artist Picture */}
-            <div className="col-lg-6">
-              <div className="card">
-                <img
-                  src={artist.photo}
-                  className="card-img-top"
-                  alt="Artist Picture"
-                />
-                {/* <div className="card-body">
-                <h5 className="card-title">{artist.artist_name}</h5>
-              </div> */}
-              </div>
+          {/* Right Column with Artist Picture */}
+          <div className="col-lg-6">
+            <div className="card">
+              <img
+                src={artist.photo}
+                className="card-img-top"
+                alt="Artist Picture"
+              />
+              {/* <div className="card-body">
+            <h5 className="card-title">{artist.artist_name}</h5>
+          </div> */}
             </div>
           </div>
         </div>
-      </section>
-    </Layout>
+      </div>
+    </section>
   );
 };
 

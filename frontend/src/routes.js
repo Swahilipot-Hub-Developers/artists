@@ -10,17 +10,17 @@ export default [
         Icon: IoHomeOutline
     },
     {
-        to: '/about',
+        to: '',
         name: 'About',
         Icon: BiUserCircle
     },
     {
-        to: '/dashboard',
+        to: '/CRUD/portfolio',
         name: 'Portfolio',
         Icon: BsSpeedometer2
     },
     {
-        to: '/test-components',
+        to: '/CRUD/skills',
         name: 'Skills and Talents',
         Icon: IoGridOutline
     },
