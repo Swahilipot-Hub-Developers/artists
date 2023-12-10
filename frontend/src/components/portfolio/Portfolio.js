@@ -256,7 +256,7 @@ const Portfolio = () => {
                 >
                   <div className="portfolio-wrap">
                     <figure>
-                      <Link href="/profile">
+                      <Link href="/artistProfile/profile">
                         <img
                           src="assets/images/projects/Image_30.jpg"
                           className="img-fluid"
@@ -411,30 +411,6 @@ const Portfolio = () => {
           </div>
         </section>
 
-        <div className="container mt-5">
-          <h1 className="mb-4">Artists</h1>
-          <div className="row">
-            {items.map((item) => (
-              <div key={item.id} className="col-md-4 mb-4">
-                <div className="card">
-                  {/* Add logic to display the photo if available */}
-                  {item.photo && (
-                    <img
-                      src={`${item.photo}`}
-                      className="card-img-top"
-                      alt={item.name}
-                    />
-                  )}
-                  <div className="card-body">
-                    <h5 className="card-title">{item.name}</h5>
-                    <h6 className="card-title">{item.type}</h6>
-                    <p className="card-text">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </main>
     </>
   );

@@ -38,7 +38,7 @@ const LoginForm = () => {
         });
 
         setErrorMessage("");
-        Router.push("/homepage");
+        Router.push("/dashboard/homepage");
       } else {
         // Handle other possible responses (e.g., invalid credentials)
         setErrorMessage("Invalid credentials. Please try again.");
@@ -129,7 +129,7 @@ const LoginForm = () => {
                             <a className="text-muted" href="#!">
                               Forgot password?
                             </a>
-                            <a href="/signup" className="btn btn-link">
+                            <a href="/auth/signup" className="btn btn-link">
                               Create new account
                             </a>
                           </div>

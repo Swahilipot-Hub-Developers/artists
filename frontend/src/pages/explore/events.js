@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Layout from "../layout/Layout";
+import Layout from "../../layout/Layout";
 
 const UpcomingEventsPage = () => {
   // Dummy data for upcoming events

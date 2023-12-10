@@ -32,14 +32,14 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-            <Link href="/login">
+            <Link href="auth/login">
                 <div className="nav-link scrollto" href="#" target="_blank">
                   Login
                 </div>
               </Link>
             </li>
             <li>
-            <Link href="/signup">
+            <Link href="/auth/signup">
                 <div className="nav-link scrollto" href="#" target="_blank">
                   Sign Up
                 </div>

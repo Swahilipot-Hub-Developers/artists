@@ -1,5 +1,5 @@
 // pages/login.js
-import Login from '../components/login/login';
+import Login from '../../components/login/login';
 
 const LoginPage = () => {
   return (
