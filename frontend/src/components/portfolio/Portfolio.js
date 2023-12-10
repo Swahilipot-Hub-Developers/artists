@@ -256,7 +256,7 @@ const Portfolio = () => {
                 >
                   <div className="portfolio-wrap">
                     <figure>
-                      <Link href="/profile">
+                      <Link href="/artistProfile/profile">
                         <img
                           src="assets/images/projects/Image_30.jpg"
                           className="img-fluid"

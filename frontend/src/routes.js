@@ -5,7 +5,7 @@ import { AiOutlineBarChart } from "react-icons/ai";
 
 export default [
     {
-        to: '/profile',
+        to: '/dashboard/homepage',
         name: 'Home',
         Icon: IoHomeOutline
     },
@@ -25,7 +25,7 @@ export default [
         Icon: IoGridOutline
     },
     {
-        to: '/statistics',
+        to: '/CRUD/contact',
         name: 'Contact',
         Icon: AiOutlineBarChart
     }

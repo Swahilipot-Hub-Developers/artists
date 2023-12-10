@@ -12,7 +12,7 @@ const SidebarNavigation = ({
 }) => {
   const router = useRouter();
 
-  console.log({ router });
+  // console.log({ router });
   
   return (
     <section className={`${styles.container} ${sidebarMenuActive ? styles['active'] : ''}`}>
