@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "@/ui-components/layout";
 
@@ -8,8 +8,40 @@ const ArtistForm = () => {
     expert_level: "",
     profession: "",
     location: "",
-    // other fields
+    description: "",
   });
+
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    const fetchArtistData = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/artist-bio/",
+          {
+            headers: {
+              Authorization: `Token fe5a1cd0018e74a5fa99e6b6b10f376b285c2252`,
+            },
+          }
+        );
+        // Assuming response.data contains the artist's bio data
+        const artistData = response.data;
+
+        // Set the fetched data into the form state
+        setFormData({
+          artist_name: artistData.artist_name,
+          expert_level: artistData.expert_level,
+          profession: artistData.profession,
+          location: artistData.location,
+          description: artistData.description,
+        });
+      } catch (error) {
+        console.error("Error fetching artist data:", error);
+      }
+    };
+
+    fetchArtistData();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,15 +61,13 @@ const ArtistForm = () => {
         }
       );
 
-      // Handle success, reset form, or perform any necessary action
-      console.log("New artist created:", response.data);
-      setFormData({
-        artist_name: "",
-        expert_level: "",
-        profession: "",
-        location: "",
-        // reset other fields if needed
-      });
+      // Handle success
+      setSuccessMessage("Update successful!"); // Set success message
+
+      // Reset success message after a few seconds
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000); // Reset after 3 seconds
     } catch (error) {
       console.error("Error creating artist:", error);
     }
@@ -68,16 +98,20 @@ const ArtistForm = () => {
                 <label htmlFor="expertLevel" className="form-label">
                   Expert Level
                 </label>
-                <input
-                  type="text"
+                <select
                   className="form-control form-control-lg"
                   id="expertLevel"
-                  placeholder="Expert Level"
                   name="expert_level"
                   value={formData.expert_level}
                   onChange={handleChange}
-                />
+                >
+                  <option value="">Select Expert Level</option>
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
               </div>
+
               <div className="mb-3">
                 <label htmlFor="profession" className="form-label">
                   Profession
@@ -106,10 +140,23 @@ const ArtistForm = () => {
                   onChange={handleChange}
                 />
               </div>
-              {/* Other input fields as needed */}
+              <div className="mb-3">
+                <label htmlFor="location" className="form-label">
+                  Description
+                </label>
+                <textarea
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="description"
+                  placeholder="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                />
+              </div>
 
               <div className="text-center">
-                <button type="submit" className="btn btn-primary btn-lg">
+                <button type="submit" className="btn btn-secondary btn-lg">
                   Update
                 </button>
               </div>
