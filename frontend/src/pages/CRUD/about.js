@@ -1,75 +1,124 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import axios from "axios";
+import Layout from "@/ui-components/layout";
 
-const Hero = () => {
-  const [artist, setArtist] = useState([]);
+const ArtistForm = () => {
+  const [formData, setFormData] = useState({
+    artist_name: "",
+    expert_level: "",
+    profession: "",
+    location: "",
+    // other fields
+  });
 
-  useEffect(() => {
-    const fetchArtist = async () => {
-      try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/artist-bio/",
-          {
-            headers: {
-              Authorization: `Token fe5a1cd0018e74a5fa99e6b6b10f376b285c2252`, // Set the token in the Authorization header
-            },
-          }
-        );
-        setArtist(response.data);
-      } catch (error) {
-        console.error("Error fetching artist data", error);
-      }
-    };
-    fetchArtist();
-  }, []);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.patch(
+        "http://127.0.0.1:8000/api/artist-bio/",
+        formData,
+        {
+          headers: {
+            Authorization: `Token fe5a1cd0018e74a5fa99e6b6b10f376b285c2252`,
+          },
+        }
+      );
+
+      // Handle success, reset form, or perform any necessary action
+      console.log("New artist created:", response.data);
+      setFormData({
+        artist_name: "",
+        expert_level: "",
+        profession: "",
+        location: "",
+        // reset other fields if needed
+      });
+    } catch (error) {
+      console.error("Error creating artist:", error);
+    }
+  };
+
   return (
-    <section id="hero">
+    <Layout>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-6 text-center">
-            <br />
-            <h2>
-              Hello 👋, I'm <span>{artist.artist_name}</span> a{" "}
-              {artist.expert_level}
-              <br />
-              {artist.profession} from {artist.location}
-            </h2>
-            <p>
-              Blanditiis praesentium aliquam illum tempore incidunt debitis
-              dolorem magni est deserunt sed qui libero. Qui voluptas
-              amet.Blanditiis praesentium aliquam illum tempore incidunt debitis
-              dolorem magni est deserunt sed qui libero. Qui voluptas
-              amet.Blanditiis praesentium aliquam illum tempore incidunt debitis
-              dolorem magni est deserunt sed qui libero. Qui voluptas amet.
-            </p>
-            <Link href="/contact" className="btn btn-primary btn-lg mx-2">
-              Available for hire
-            </Link>
-            <br />
-            <br />
-            <Link href="/contact" className="btn btn-primary btn-lg mx-2">
-              Edit
-            </Link>
-          </div>
-
-          {/* Right Column with Artist Picture */}
           <div className="col-lg-6">
-            <div className="card">
-              <img
-                src={artist.photo}
-                className="card-img-top"
-                alt="Artist Picture"
-              />
-              {/* <div className="card-body">
-            <h5 className="card-title">{artist.artist_name}</h5>
-          </div> */}
-            </div>
+            <h2 className="display-4 text-primary m-5 text-center">About</h2>
+            <form onSubmit={handleSubmit} className="border p-4 rounded">
+              <div className="mb-3">
+                <label htmlFor="artistName" className="form-label">
+                  Artist Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="artistName"
+                  placeholder="Artist Name"
+                  name="artist_name"
+                  value={formData.artist_name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="expertLevel" className="form-label">
+                  Expert Level
+                </label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="expertLevel"
+                  placeholder="Expert Level"
+                  name="expert_level"
+                  value={formData.expert_level}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="profession" className="form-label">
+                  Profession
+                </label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="profession"
+                  placeholder="Profession"
+                  name="profession"
+                  value={formData.profession}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="location" className="form-label">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="location"
+                  placeholder="Location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                />
+              </div>
+              {/* Other input fields as needed */}
+
+              <div className="text-center">
+                <button type="submit" className="btn btn-primary btn-lg">
+                  Update
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    </section>
+    </Layout>
   );
 };
 
-export default Hero;
+export default ArtistForm;

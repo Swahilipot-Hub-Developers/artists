@@ -76,19 +76,7 @@ const Header = ({ toggleSidebarMenu }) => {
             </button>
           </li>
           <li>
-            <Link href={'/'}>
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'}>
-              Users
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'}>
-              Settings
-            </Link>
+            <h4>Welcome, Aisha Suleiman</h4>
           </li>
         </ul>
       </div>

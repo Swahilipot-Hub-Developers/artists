@@ -48,7 +48,7 @@ const SignUpForm = () => {
         }, 2000);
 
         // Redirect to a dashboard or profile page after successful login
-        Router.push("/login");
+        Router.push("auth/login");
       } else {
         // Handle error response
         console.error("Signup failed:", response.data);

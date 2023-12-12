@@ -32,16 +32,22 @@ urlpatterns = [
 
     # Upcoming Events
     path('events/', UpcomingEventsListAPIView.as_view(), name='events-list'),
-    
+
     # ArtistBio
-     path('artist/', ArtistBioListCreateAPIView.as_view(), name='artist-bio-list-create'),
-     path('artist-bio/', ArtistBioDetailAPIView.as_view(), name='artist-bio-detail'),
-     path('artist-bio/<str:username>/', PublicArtistBioDetailView.as_view(), name='artist-bio-detail'),
-     
-     # Twilio SMS API
-     path('send-sms/', send_sms, name='send-sms'),
-     
-     # Send Email
-     path('send-email/', SendEmailView.as_view(), name='send-email'), 
+    path('artist-bios/', ArtistBioListCreateAPIView.as_view(),
+         name='artist-bio-list-create'),
+    path('artist-bio/', ArtistBioDetailAPIView.as_view(),
+         name='artist-bio-list'),
+    path('artist-bio/<int:pk>/', ArtistBioDetailAPIView.as_view(),
+         name='artist-bio-detail'),
+
+    path('artist-bio/<str:username>/',
+         PublicArtistBioDetailView.as_view(), name='artist-bio-detail'),
+
+    # Twilio SMS API
+    path('send-sms/', send_sms, name='send-sms'),
+
+    # Send Email
+    path('send-email/', SendEmailView.as_view(), name='send-email'),
 
 ]
