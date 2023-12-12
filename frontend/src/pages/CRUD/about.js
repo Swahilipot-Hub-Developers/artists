@@ -98,7 +98,16 @@ const ArtistForm = () => {
                 <label htmlFor="expertLevel" className="form-label">
                   Expert Level
                 </label>
-                <select
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="expert_level"
+                  placeholder="Profession"
+                  name="expert_level"
+                  value={formData.expert_level}
+                  onChange={handleChange}
+                />
+                {/* <select
                   className="form-control form-control-lg"
                   id="expertLevel"
                   name="expert_level"
@@ -109,7 +118,7 @@ const ArtistForm = () => {
                   <option value="Beginner">Beginner</option>
                   <option value="Intermediate">Intermediate</option>
                   <option value="Advanced">Advanced</option>
-                </select>
+                </select> */}
               </div>
 
               <div className="mb-3">
@@ -156,6 +165,9 @@ const ArtistForm = () => {
               </div>
 
               <div className="text-center">
+                {successMessage && ( // Check if successMessage is not empty before displaying
+                  <p className="text-success">{successMessage}</p>
+                )}
                 <button type="submit" className="btn btn-secondary btn-lg">
                   Update
                 </button>
