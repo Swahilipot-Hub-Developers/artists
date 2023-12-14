@@ -10,7 +10,7 @@ export default [
         Icon: IoHomeOutline
     },
     {
-        to: '',
+        to: '/CRUD/about',
         name: 'About',
         Icon: BiUserCircle
     },

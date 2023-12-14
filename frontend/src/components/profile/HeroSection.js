@@ -33,6 +33,7 @@ const Hero = () => {
               {artist.profession} from {artist.location}
             </h2>
             <p>
+              {/* {artist.description} */}
               Blanditiis praesentium aliquam illum tempore incidunt debitis
               dolorem magni est deserunt sed qui libero. Qui voluptas
               amet.Blanditiis praesentium aliquam illum tempore incidunt debitis
@@ -40,7 +41,7 @@ const Hero = () => {
               amet.Blanditiis praesentium aliquam illum tempore incidunt debitis
               dolorem magni est deserunt sed qui libero. Qui voluptas amet.
             </p>
-            <Link href="/contact" className="btn btn-primary btn-lg mx-2">
+            <Link href="/artistProfile/contact" className="btn btn-primary btn-lg mx-2">
               Available for hire
             </Link>
             <br />
@@ -55,9 +56,6 @@ const Hero = () => {
                 className="card-img-top"
                 alt="Artist Picture"
               />
-              {/* <div className="card-body">
-                <h5 className="card-title">{artist.artist_name}</h5>
-              </div> */}
             </div>
           </div>
         </div>
