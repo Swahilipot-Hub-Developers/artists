@@ -90,6 +90,33 @@ class Portfolio(models.Model):
         return f"{self.artist.username}'s Portfolio"
 
 
+class CurrentPortfolio(Portfolio):
+    class Meta:
+        proxy = True
+
+    def __str__(self):
+        return f"{self.artist.username}'s Current Portfolio"
+
+
+class PreviousPortfolio(Portfolio):
+    class Meta:
+        proxy = True
+
+    def __str__(self):
+        return f"{self.artist.username}'s Previous Portfolio"
+
+
+@receiver(post_save, sender=Portfolio)
+def create_portfolio_instance(sender, instance, created, **kwargs):
+    if created:
+        if instance.category == 'current':
+            CurrentPortfolio.objects.create(
+                artist=instance.artist, photo=instance.photo, video=instance.video, category='current')
+        elif instance.category == 'previous':
+            PreviousPortfolio.objects.create(
+                artist=instance.artist, photo=instance.photo, video=instance.video, category='previous')
+
+
 # Featured Artists
 class FeaturedArtists(models.Model):
     selected_artist = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
